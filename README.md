@@ -3,46 +3,46 @@
 Conversion-Landingpage für Werbeanzeigen (Meta/Google Ads) für [Innovarco](https://www.innovarco.de/) –
 Agentur für End-to-End-App-Entwicklung aus Hamburg.
 
+**Design: 1:1 im Original-CI von innovarco.de** (Webflow-Seite):
+
+- Original-Schrift **BDO Grotesk** (Variable Font, direkt vom Innovarco-CDN geladen)
+- Original-Farbtokens (`--neutral-1: #f6f6f3`, `--dark: #000`, Radius 6px/4px usw.)
+- Original-Typografie (102/51/40/32/25/20px, Weight 400)
+- Original-Bilder & -Icons (Hero-Handy, FlutterFlow-Logo, Plus-Icons, Footer-Logo) vom Webflow-CDN gehotlinkt
+- Animationen wie im Original: gestaffeltes Fade-in beim Laden, Zoom-out des Hero-Bilds,
+  Scroll-Einblendungen, Accordion-Panels, Endlos-Marquee der Technologie-Karten
+
 ## Aufbau
 
-Eine einzelne Datei: `index.html` (HTML + CSS + JS inline, keine Build-Tools nötig).
-Kann direkt auf jedem Hosting (Netlify, Vercel, GitHub Pages, eigener Server) abgelegt werden.
+Eine einzelne Datei: `index.html` (HTML + CSS + JS inline, keine Build-Tools).
+Läuft auf jedem Hosting (Netlify, Vercel, GitHub Pages, eigener Server).
 
-**Struktur der Seite (Ad → Conversion):**
+**Sektionen:**
 
-1. **Hero** – Problem-Hook („Ihre Prozesse fressen Zeit") + CTA + Trust-Elemente
-2. **Probleme** – 3 Zeitfresser, die die Zielgruppe wiedererkennt
-3. **Lösung** – Zeiteffizienz, Speed durch FlutterFlow, alles aus einer Hand
-4. **Prozess** – 5 Schritte (Analyse → Design → Entwicklung → Testing → Support)
-5. **Referenz** – Case Study Justmatch + Kundenstimmen
-6. **FAQ** – Einwandbehandlung
-7. **Formular** – Name, E-Mail, Telefon, Vorhaben + Datenschutz-Checkbox
-8. **Footer** – Impressum/Datenschutz
+1. Navbar (INNOVARCO · Team / Services / Pakete)
+2. Hero: Handy-Bild mit Zoom-out-Animation + „Deine Agentur für Apps, die funktionieren…"
+3. „Mehr Effizienz. Weniger Kosten." mit 60% / 30% / 50%-Metrik-Boxen
+4. FlutterFlow-Partner-Kachel (Gradient `45deg, #4b39ef → #fff`)
+5. „Der Entwicklungsprozess" – 5 Accordion-Panels (Umfang, Design, Entwicklung, Test & Feedback, Support)
+6. „Modernste Technologien." – Logo-Marquee
+7. **Lead-Formular** (Name, E-Mail, Telefon, Vorhaben + Datenschutz-Checkbox) in der
+   „Bereit für Deine App? Lass uns sprechen."-Kachel
+8. FAQ-Accordions
+9. Schwarzer Footer mit großem INNOVARCO-Logo, Kontakt & Adresse
 
-## Anpassen
+## Formular anbinden
 
-### CI / Farben
-
-Alle Farben und Schriften liegen als CSS-Variablen am Anfang des `<style>`-Blocks
-(`:root { … }`). Dort lassen sich Akzentfarbe, Hintergründe etc. in einer Minute
-exakt an das Innovarco-CI angleichen.
-
-### Formular anbinden
-
-Das Formular zeigt aktuell nur die Erfolgsmeldung (Demo-Modus). Für echten Versand
-in `index.html` die Konstante `FORM_ENDPOINT` setzen, z. B. auf einen
-[Formspree](https://formspree.io)-, Make-/Zapier-Webhook- oder eigenen Server-Endpoint:
+Das Formular zeigt aktuell nur die Erfolgsmeldung (Demo-Modus). Für echten Versand in
+`index.html` die Konstante `FORM_ENDPOINT` setzen (Formspree, Make/Zapier-Webhook o. ä.):
 
 ```js
 var FORM_ENDPOINT = "https://formspree.io/f/XXXXXXXX";
 ```
 
-### Wichtig vor Live-Gang
+## Hinweise vor Live-Gang
 
-- [ ] **Kundenstimmen prüfen/ersetzen:** Die zwei Zitate im Referenz-Bereich sind
-      Platzhalter und müssen durch echte, freigegebene Kundenstimmen ersetzt werden.
-- [ ] **Kennzahlen prüfen:** Werte wie „bis zu 8 h Zeitersparnis" sind plausible
-      Platzhalter – durch echte Projektzahlen ersetzen oder entfernen.
-- [ ] Datenschutz-Link (`#datenschutz`) auf die echte Datenschutzerklärung zeigen lassen.
-- [ ] `FORM_ENDPOINT` setzen (siehe oben).
-- [ ] `noindex` im `<meta name="robots">` ggf. entfernen, falls die Seite indexiert werden soll.
+- [ ] `FORM_ENDPOINT` setzen (siehe oben)
+- [ ] Assets werden vom Webflow-CDN der Original-Seite geladen (`cdn.prod.website-files.com`).
+      Für volle Unabhängigkeit die Bilder/Schrift herunterladen und lokal ins Repo legen.
+- [ ] FAQ-Antworten sind kurz formuliert – bei Bedarf durch die Original-Antworten ersetzen.
+- [ ] `noindex` im `<meta name="robots">` entfernen, falls die Seite indexiert werden soll.
