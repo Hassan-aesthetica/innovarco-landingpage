@@ -227,6 +227,43 @@
     .expertise-card-image { width: 160px; height: 160px; object-fit: contain; }
     @media (max-width: 767px) { .expertise-card-image { width: 110px; height: 110px; } }
 
+    /* ---------- Referenzen / Projekt ---------- */
+    .project-card {
+      border-radius: var(--default-radius);
+      background-color: var(--neutral-1);
+      overflow: hidden;
+    }
+    .project-hero-image { width: 100%; display: block; }
+    .project-body {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      grid-column-gap: 48px; grid-row-gap: 36px;
+      padding: 36px 24px;
+    }
+    @media (max-width: 767px) { .project-body { grid-template-columns: 1fr; } }
+    .project-meta { display: flex; flex-flow: column; grid-row-gap: 24px; }
+    .project-meta-item { display: flex; flex-flow: column; grid-row-gap: 4px; }
+    .meta-label { color: var(--body-text); font-size: 13px; }
+    .tag-row { display: flex; flex-wrap: wrap; grid-column-gap: 8px; grid-row-gap: 8px; }
+    .tag {
+      border: 1px solid var(--border-dark);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 13px;
+      background-color: var(--white);
+    }
+    .project-text { display: flex; flex-flow: column; grid-row-gap: 24px; }
+    .result-list { display: flex; flex-flow: column; grid-row-gap: 10px; }
+    .arrow-link-dark { display: inline-flex; align-items: center; grid-column-gap: 6px; text-decoration: underline; }
+
+    /* ---------- CTA-Buttons ---------- */
+    .button.small { padding: 12px 24px; }
+    .nav-cta { margin-left: 6px; }
+    @media (max-width: 479px) { .nav-cta { padding: 10px 14px; } }
+    .hero-cta-row { display: flex; flex-wrap: wrap; align-items: center; grid-column-gap: 18px; grid-row-gap: 12px; margin-top: 30px; }
+    .hero-note { color: var(--body-text); font-size: 14px; }
+    .inline-cta { display: flex; flex-wrap: wrap; align-items: center; grid-column-gap: 18px; grid-row-gap: 12px; }
+
     /* ---------- CTA / Formular ---------- */
     .cta-card {
       border-radius: var(--default-radius);
@@ -302,9 +339,9 @@
     <div class="container---main navbar-row">
       <a href="#top" class="nav-logo">INNOVARCO</a>
       <nav class="nav-links">
-        <a href="https://www.innovarco.de/company/about" class="nav-link-2">Team</a>
-        <a href="https://www.innovarco.de/company/services" class="nav-link-2">Services</a>
-        <a href="https://www.innovarco.de/company/pricing" class="nav-link-2">Pakete</a>
+        <a href="#referenzen" class="nav-link-2">Referenzen</a>
+        <a href="#prozess" class="nav-link-2">Prozess</a>
+        <a href="#kontakt" class="button small nav-cta">Kostenlose Erstberatung</a>
       </nav>
     </div>
   </div>
@@ -323,6 +360,11 @@
         </div>
         <div class="fade-in-second align-bottom">
           <h1 class="title-large">Deine Agentur für Apps, die funktionieren. Modern, schnell, stressfrei.</h1>
+          <div class="large-text body-text content-short" style="margin-top:18px;">Manuelle Prozesse kosten Dein Team jede Woche Stunden. Wir digitalisieren sie – als Dein FlutterFlow Agency Partner aus Hamburg.</div>
+          <div class="hero-cta-row">
+            <a href="#kontakt" class="button">Jetzt Projekt anfragen</a>
+            <div class="hero-note">Kostenlos &amp; unverbindlich · Antwort in 24&nbsp;h</div>
+          </div>
         </div>
       </div>
     </div>
@@ -363,6 +405,15 @@
                 <div class="metric-explainer">schnellere interne Entscheidungsprozesse</div>
               </div>
             </div>
+            <div class="ethos-box" style="justify-content:space-between;">
+              <div class="ethos-box-text">
+                <div class="subheading">Wie viel Zeit steckt in Deinen Prozessen? Finde es heraus – in einem kostenlosen Erstgespräch.</div>
+              </div>
+              <div class="inline-cta">
+                <a href="#kontakt" class="button">Potenzial-Check anfragen</a>
+                <div class="hero-note">Dauert 2 Minuten</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -384,8 +435,90 @@
     </div>
   </section>
 
+  <!-- ================= REFERENZEN ================= -->
+  <section class="section" id="referenzen">
+    <div class="container---main">
+      <div class="fade-in-on-scroll">
+        <div class="vertical-section">
+          <div class="section-title">
+            <div class="title-large">Referenzen.</div>
+            <div class="large-text content-short">Erfolgreiche Projekte statt leerer Versprechen – so sieht es aus, wenn eine App einfach funktioniert.</div>
+          </div>
+
+          <div class="project-card">
+            <img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67b88a7ccf01be83ee65e6a9_project-01.webp"
+                 alt="Justmatch – Recruiting-Plattform von Innovarco"
+                 sizes="100vw"
+                 srcset="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67b88a7ccf01be83ee65e6a9_project-01-p-800.webp 800w, https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67b88a7ccf01be83ee65e6a9_project-01-p-1600.webp 1600w, https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67b88a7ccf01be83ee65e6a9_project-01.webp 1920w"
+                 class="project-hero-image"/>
+            <div class="project-body">
+              <div class="project-meta">
+                <div class="project-meta-item">
+                  <div class="meta-label">Kunde</div>
+                  <div>Justmatch</div>
+                </div>
+                <div class="project-meta-item">
+                  <div class="meta-label">Industrie</div>
+                  <div>Recruiting</div>
+                </div>
+                <div class="project-meta-item">
+                  <div class="meta-label">Homepage</div>
+                  <a href="https://justmatch.wtf/" target="_blank" rel="noopener" class="arrow-link-dark">justmatch.wtf ↗</a>
+                </div>
+                <div class="project-meta-item">
+                  <div class="meta-label">Technologien</div>
+                  <div class="tag-row">
+                    <div class="tag">Flutterflow</div>
+                    <div class="tag">Firebase</div>
+                    <div class="tag">RESTful</div>
+                    <div class="tag">Google Cloud</div>
+                  </div>
+                </div>
+              </div>
+              <div class="project-text">
+                <div class="title-small">Justmatch – Recruiting neu gedacht</div>
+                <div class="subheading muted-text">Für Justmatch, ein visionäres Recruiting-Tool, haben wir eine digitale Lösung entwickelt, die den konservativen Markt revolutioniert. Die Plattform nutzt modernste KI und BigData, um Kandidaten und Unternehmen intelligent zusammenzubringen.</div>
+                <div class="result-list">
+                  <div class="body-text">✓&nbsp;&nbsp;Komplette Plattform – von der Analyse bis zum Launch aus einer Hand</div>
+                  <div class="body-text">✓&nbsp;&nbsp;KI-gestütztes Matching statt tagelanger manueller Vorauswahl</div>
+                  <div class="body-text">✓&nbsp;&nbsp;Live in Wochen dank FlutterFlow – nicht in Monaten</div>
+                  <div class="body-text">✓&nbsp;&nbsp;Nach dem Launch: proaktive Wartung &amp; laufender Support</div>
+                </div>
+                <div class="inline-cta">
+                  <a href="#kontakt" class="button">Ähnliches Projekt? Lass uns sprechen</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ethos-boxes">
+            <div class="ethos-box">
+              <div class="ethos-box-text">
+                <div class="subheading muted-text">Ein Team, ein Ansprechpartner: Projektmanagement, Design, Entwicklung, Hosting und Wartung – wir decken den ganzen Software-Lifecycle ab.</div>
+              </div>
+              <div class="metric-aligned-bottom">
+                <div class="title-huge">100%</div>
+                <div class="metric-explainer">aus einer Hand – von der Idee bis zum Betrieb</div>
+              </div>
+            </div>
+            <div class="ethos-box">
+              <div class="ethos-box-text">
+                <div class="subheading muted-text">Als FlutterFlow Agency Partner entwickeln wir mobile und webbasierte Apps in einem Bruchteil klassischer Entwicklungszeit.</div>
+              </div>
+              <div class="metric-aligned-bottom">
+                <div class="title-huge">24h</div>
+                <div class="metric-explainer">bis zu unserer Antwort auf Deine Anfrage</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= ENTWICKLUNGSPROZESS ================= -->
-  <section class="section">
+  <section class="section" id="prozess">
     <div class="container---main">
       <div class="fade-in-on-scroll">
         <div class="vertical-section">
@@ -555,12 +688,13 @@
         <div class="cta-left">
           <div class="section-title">
             <div class="title-large"><span class="muted-text">Bereit für Deine App?</span><br/>Lass uns sprechen.</div>
-            <div class="large-text content-short body-text">Schilder uns kurz Dein Vorhaben – wir melden uns innerhalb von 24&nbsp;Stunden mit einer ehrlichen Einschätzung. Unverbindlich und kostenlos.</div>
+            <div class="large-text content-short body-text">Schilder uns in zwei Minuten Dein Vorhaben – Du bekommst innerhalb von 24&nbsp;Stunden eine ehrliche Einschätzung zu Machbarkeit, Zeitrahmen und nächsten Schritten. Unverbindlich und kostenlos.</div>
           </div>
           <div class="list">
-            <div class="body-text">✓&nbsp;&nbsp;Kostenlose Erstberatung</div>
+            <div class="body-text">✓&nbsp;&nbsp;Kostenlose Erstberatung – kein Verkaufsgespräch</div>
             <div class="body-text">✓&nbsp;&nbsp;Antwort innerhalb von 24 Stunden</div>
-            <div class="body-text">✓&nbsp;&nbsp;Direkter Draht zum Team aus Hamburg</div>
+            <div class="body-text">✓&nbsp;&nbsp;Du sprichst direkt mit den Machern, die Dein Projekt umsetzen</div>
+            <div class="body-text">✓&nbsp;&nbsp;Deine Daten bleiben vertraulich und werden nicht weitergegeben</div>
           </div>
         </div>
         <div>
@@ -586,7 +720,8 @@
                 <input type="checkbox" name="consent" required/>
                 <span class="checkbox-label">Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert und verwendet werden. Weitere Informationen in der <a href="https://www.innovarco.de/utilities/privacy-policy" style="text-decoration:underline;">Datenschutzerklärung</a>.</span>
               </label>
-              <button type="submit" class="button">Kontakt</button>
+              <button type="submit" class="button">Kostenlose Erstberatung anfragen</button>
+              <div class="hero-note">🔒 Vertraulich · Keine Weitergabe Deiner Daten · Antwort in 24&nbsp;h</div>
             </div>
             <div class="form-success" id="formSuccess">
               <div class="title-small">Moin &amp; danke!</div>
