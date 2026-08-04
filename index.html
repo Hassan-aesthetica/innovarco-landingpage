@@ -227,6 +227,14 @@
     .expertise-card-image { width: 160px; height: 160px; object-fit: contain; }
     @media (max-width: 767px) { .expertise-card-image { width: 110px; height: 110px; } }
 
+    /* ---------- Formular-Karte im Hero ---------- */
+    .form-card {
+      border-radius: var(--default-radius);
+      background-color: var(--neutral-1);
+      padding: 24px;
+      width: 100%;
+    }
+
     /* ---------- Referenzen / Projekt ---------- */
     .project-card {
       border-radius: var(--default-radius);
@@ -346,25 +354,68 @@
     </div>
   </div>
 
-  <!-- ================= HERO ================= -->
+  <!-- ================= HERO MIT FORMULAR ================= -->
   <section class="section" id="top">
     <div class="container---main">
       <div class="grid-hero">
-        <div class="fade-in-first">
-          <div class="zoom-out-image-wrapper">
-            <img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1).png"
-                 alt="App-Entwicklung von Innovarco"
-                 sizes="(max-width: 1920px) 100vw, 1920px"
-                 srcset="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1)-p-500.png 500w, https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1)-p-800.png 800w, https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1)-p-1080.png 1080w, https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1)-p-1600.png 1600w, https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1).png 1920w"/>
+        <div class="fade-in-first align-bottom">
+          <h1 class="title-large">Deine Agentur für Apps, die funktionieren. Modern, schnell, stressfrei.</h1>
+          <div class="large-text body-text content-short" style="margin-top:18px;">Wie viele Stunden verliert Dein Team jede Woche an manuelle Abläufe? Welcher Prozess nervt Dich am meisten – Excel-Listen, doppelte Dateneingabe, Zettelwirtschaft? Genau da setzen wir an: als Dein FlutterFlow Agency Partner aus Hamburg.</div>
+          <div class="list" style="margin-top:24px;">
+            <div class="body-text">✓&nbsp;&nbsp;Antwort innerhalb von 24 Stunden</div>
+            <div class="body-text">✓&nbsp;&nbsp;Kostenlos, unverbindlich, kein Verkaufsgespräch</div>
+            <div class="body-text">✓&nbsp;&nbsp;Du sprichst direkt mit den Machern</div>
           </div>
         </div>
-        <div class="fade-in-second align-bottom">
-          <h1 class="title-large">Deine Agentur für Apps, die funktionieren. Modern, schnell, stressfrei.</h1>
-          <div class="large-text body-text content-short" style="margin-top:18px;">Manuelle Prozesse kosten Dein Team jede Woche Stunden. Wir digitalisieren sie – als Dein FlutterFlow Agency Partner aus Hamburg.</div>
-          <div class="hero-cta-row">
-            <a href="#kontakt" class="button">Jetzt Projekt anfragen</a>
-            <div class="hero-note">Kostenlos &amp; unverbindlich · Antwort in 24&nbsp;h</div>
+        <div class="fade-in-second" style="align-self:stretch;width:100%;">
+          <div class="form-card" id="kontakt">
+            <div class="title-small">Was ist Dein Vorhaben?</div>
+            <div class="body-text" style="margin-top:6px;margin-bottom:24px;">Vier kurze Fragen – mehr brauchen wir nicht, um Dir in 24&nbsp;Stunden eine ehrliche Einschätzung zu geben.</div>
+            <form class="form" id="leadForm" novalidate>
+              <div id="formFields" class="form">
+                <div>
+                  <label class="field-label" for="name">Wie heißt Du?</label>
+                  <input class="text-field" type="text" id="name" name="name" placeholder="Vor- und Nachname" autocomplete="name" required/>
+                </div>
+                <div>
+                  <label class="field-label" for="email">Wie erreichen wir Dich per E-Mail?</label>
+                  <input class="text-field" type="email" id="email" name="email" placeholder="name@firma.de" autocomplete="email" required/>
+                </div>
+                <div>
+                  <label class="field-label" for="phone">Unter welcher Nummer können wir Dich anrufen?</label>
+                  <input class="text-field" type="tel" id="phone" name="phone" placeholder="+49 40 123456" autocomplete="tel" required/>
+                </div>
+                <div>
+                  <label class="field-label" for="vorhaben">Was möchtest Du digitalisieren oder bauen?</label>
+                  <textarea class="text-field" id="vorhaben" name="vorhaben" placeholder="Welcher Prozess soll einfacher werden? Ein paar Sätze genügen." required></textarea>
+                </div>
+                <label class="checkbox-row">
+                  <input type="checkbox" name="consent" required/>
+                  <span class="checkbox-label">Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert und verwendet werden. Weitere Informationen in der <a href="https://www.innovarco.de/utilities/privacy-policy" style="text-decoration:underline;">Datenschutzerklärung</a>.</span>
+                </label>
+                <button type="submit" class="button">Kostenlose Erstberatung anfragen</button>
+                <div class="hero-note">🔒 Vertraulich · Keine Weitergabe Deiner Daten · Antwort in 24&nbsp;h</div>
+              </div>
+              <div class="form-success" id="formSuccess">
+                <div class="title-small">Moin &amp; danke!</div>
+                <div class="large-text body-text" style="margin-top:12px;">Wir haben Dein Vorhaben erhalten und melden uns innerhalb von 24 Stunden bei Dir.</div>
+              </div>
+            </form>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HERO-BILD ================= -->
+  <section class="section" style="padding-bottom:36px;">
+    <div class="container---main">
+      <div class="fade-in-third">
+        <div class="zoom-out-image-wrapper">
+          <img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1).png"
+               alt="App-Entwicklung von Innovarco"
+               sizes="(max-width: 1920px) 100vw, 1920px"
+               srcset="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1)-p-500.png 500w, https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1)-p-800.png 800w, https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1)-p-1080.png 1080w, https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1)-p-1600.png 1600w, https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1).png 1920w"/>
         </div>
       </div>
     </div>
@@ -380,7 +431,7 @@
           <div class="ethos-boxes">
             <div class="ethos-box">
               <div class="ethos-box-text">
-                <div class="subheading muted-text">Automatisierte Workflows und digitale Schnittstellen reduzieren manuelle Arbeitsschritte und beschleunigen Abläufe erheblich.</div>
+                <div class="subheading muted-text">Wie oft tippt Dein Team dieselben Daten doppelt ein – in Excel, per E-Mail, ins System? Automatisierte Workflows machen damit Schluss.</div>
               </div>
               <div class="metric-aligned-bottom">
                 <div class="title-huge">60%</div>
@@ -389,7 +440,7 @@
             </div>
             <div class="ethos-box">
               <div class="ethos-box-text">
-                <div class="subheading muted-text">Die Digitalisierung interner Prozesse minimiert papierbasierte Abläufe, verringert Fehler und spart Ressourcen.</div>
+                <div class="subheading muted-text">Wie viel kostet Dich Papierkram wirklich – in Fehlern, Suchzeiten und Nerven? Digitale Prozesse sparen messbar Ressourcen.</div>
               </div>
               <div class="metric-aligned-bottom">
                 <div class="title-huge">30%</div>
@@ -398,7 +449,7 @@
             </div>
             <div class="ethos-box">
               <div class="ethos-box-text">
-                <div class="subheading muted-text">Durch maßgeschneiderte Softwarelösungen und zentrale Datenplattformen können Unternehmen Entscheidungen auf Basis von Echtzeit-Daten treffen, ohne langwierige Abstimmungen oder manuelle Analysen.</div>
+                <div class="subheading muted-text">Wie lange wartest Du auf Zahlen, bevor Du entscheiden kannst? Mit Echtzeit-Daten aus einer zentralen Plattform entscheidest Du sofort.</div>
               </div>
               <div class="metric-aligned-bottom">
                 <div class="title-huge">50%</div>
@@ -407,10 +458,10 @@
             </div>
             <div class="ethos-box" style="justify-content:space-between;">
               <div class="ethos-box-text">
-                <div class="subheading">Wie viel Zeit steckt in Deinen Prozessen? Finde es heraus – in einem kostenlosen Erstgespräch.</div>
+                <div class="subheading">Hast Du Dich in einer dieser Fragen wiedererkannt? Dann lass uns über Deinen konkreten Fall sprechen – kostenlos und unverbindlich.</div>
               </div>
               <div class="inline-cta">
-                <a href="#kontakt" class="button">Potenzial-Check anfragen</a>
+                <a href="#kontakt" class="button">Ja – Potenzial-Check anfragen</a>
                 <div class="hero-note">Dauert 2 Minuten</div>
               </div>
             </div>
@@ -682,7 +733,7 @@
   </section>
 
   <!-- ================= CTA + FORMULAR ================= -->
-  <section class="section" id="kontakt">
+  <section class="section">
     <div class="container---main">
       <div class="cta-card fade-in-on-scroll">
         <div class="cta-left">
@@ -697,37 +748,17 @@
             <div class="body-text">✓&nbsp;&nbsp;Deine Daten bleiben vertraulich und werden nicht weitergegeben</div>
           </div>
         </div>
-        <div>
-          <form class="form" id="leadForm" novalidate>
-            <div id="formFields" class="form">
-              <div>
-                <label class="field-label" for="name">Name</label>
-                <input class="text-field" type="text" id="name" name="name" placeholder="Vor- und Nachname" autocomplete="name" required/>
-              </div>
-              <div>
-                <label class="field-label" for="email">E-Mail</label>
-                <input class="text-field" type="email" id="email" name="email" placeholder="name@firma.de" autocomplete="email" required/>
-              </div>
-              <div>
-                <label class="field-label" for="phone">Telefon</label>
-                <input class="text-field" type="tel" id="phone" name="phone" placeholder="+49 40 123456" autocomplete="tel" required/>
-              </div>
-              <div>
-                <label class="field-label" for="vorhaben">Dein Vorhaben</label>
-                <textarea class="text-field" id="vorhaben" name="vorhaben" placeholder="Was möchtest Du digitalisieren oder entwickeln?" required></textarea>
-              </div>
-              <label class="checkbox-row">
-                <input type="checkbox" name="consent" required/>
-                <span class="checkbox-label">Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert und verwendet werden. Weitere Informationen in der <a href="https://www.innovarco.de/utilities/privacy-policy" style="text-decoration:underline;">Datenschutzerklärung</a>.</span>
-              </label>
-              <button type="submit" class="button">Kostenlose Erstberatung anfragen</button>
-              <div class="hero-note">🔒 Vertraulich · Keine Weitergabe Deiner Daten · Antwort in 24&nbsp;h</div>
-            </div>
-            <div class="form-success" id="formSuccess">
-              <div class="title-small">Moin &amp; danke!</div>
-              <div class="large-text body-text" style="margin-top:12px;">Wir haben Dein Vorhaben erhalten und melden uns innerhalb von 24 Stunden bei Dir.</div>
-            </div>
-          </form>
+        <div class="project-text" style="justify-content:center;">
+          <div class="subheading">Frag Dich einmal ehrlich:</div>
+          <div class="result-list">
+            <div class="body-text">→&nbsp;&nbsp;Was kostet es Dich jeden Monat, dass dieser Prozess noch manuell läuft?</div>
+            <div class="body-text">→&nbsp;&nbsp;Wie lange willst Du die Idee noch vor Dir herschieben?</div>
+            <div class="body-text">→&nbsp;&nbsp;Was wäre, wenn Deine App in wenigen Wochen live ist?</div>
+          </div>
+          <div class="inline-cta">
+            <a href="#kontakt" class="button">Antworten holen – zum Formular</a>
+            <div class="hero-note">Dauert 2 Minuten</div>
+          </div>
         </div>
       </div>
     </div>
