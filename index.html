@@ -32,6 +32,8 @@
       --body-text-white: #ffffffb3;
       --body-text: #000000b3;
       --neutral-1: #f6f6f3;
+      --accent: #ffd84d;
+      --accent-soft: #fff3c2;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -61,6 +63,29 @@
     .white-body-text { color: var(--body-text-white); }
     .small-text   { font-size: 13px; line-height: 1.4em; }
     .bold-text    { font-weight: 600; }
+
+    /* ---------- Gelbe Akzente ---------- */
+    .highlight {
+      background-image: linear-gradient(transparent 58%, var(--accent) 58%, var(--accent) 94%, transparent 94%);
+    }
+    .tick {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 19px; height: 19px; flex-shrink: 0;
+      border-radius: 50%;
+      background-color: var(--accent);
+      color: #000;
+      font-size: 11px; line-height: 1;
+      margin-right: 10px;
+      transform: translateY(2px);
+    }
+    .section-title .title-large::after {
+      content: "";
+      display: block;
+      width: 54px; height: 4px;
+      border-radius: 2px;
+      background-color: var(--accent);
+      margin-top: 16px;
+    }
     @media (max-width: 991px) {
       .title-huge   { font-size: 81px; }
       .title-large  { font-size: 40px; }
@@ -121,7 +146,8 @@
       transition: opacity .2s;
       text-align: center;
     }
-    .button:hover { opacity: .8; }
+    .button:hover { opacity: 1; transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,.18); }
+    .button { transition: opacity .2s, transform .2s, box-shadow .2s; }
     .button.small { padding: 12px 24px; }
     @media (max-width: 479px) { .button.small { padding: 10px 16px; font-size: 14px; } }
 
@@ -168,14 +194,16 @@
     .form-card {
       border-radius: var(--default-radius);
       background-color: var(--neutral-1);
-      padding: 24px;
+      border: 1px solid var(--border-dark);
+      box-shadow: 0 16px 44px rgba(0, 0, 0, .07);
+      padding: 28px 24px;
       width: 100%;
     }
     @media (min-width: 992px) { .form-card { position: sticky; top: 94px; } }
     .progress-row { display: flex; justify-content: space-between; align-items: center; margin: 18px 0 10px; }
     .progress-label { font-size: 13px; color: var(--body-text); }
     .progress-track { height: 3px; background-color: var(--border-dark); border-radius: 2px; overflow: hidden; margin-bottom: 24px; }
-    .progress-fill { height: 100%; background-color: var(--dark); width: 20%; transition: width .35s ease; }
+    .progress-fill { height: 100%; background-color: var(--accent); width: 20%; transition: width .35s ease; }
 
     .form-step { display: none; }
     .form-step.active { display: flex; flex-flow: column; grid-row-gap: 16px; animation: stepIn .35s ease; }
@@ -196,6 +224,7 @@
       transition: border-color .15s, background-color .15s, color .15s, transform .15s;
     }
     .option-btn:hover { border-color: #000; transform: translateX(2px); }
+    .option-btn:hover .option-icon { background-color: var(--accent); }
     .option-btn.selected { background-color: var(--dark); border-color: var(--dark); color: var(--white); }
     .option-icon {
       width: 42px; height: 42px; flex-shrink: 0;
@@ -203,9 +232,9 @@
       background-color: var(--neutral-2);
       display: flex; align-items: center; justify-content: center;
       font-weight: 600; font-size: 15px;
-      transition: background-color .15s;
+      transition: background-color .15s, color .15s;
     }
-    .option-btn.selected .option-icon { background-color: #ffffff2b; }
+    .option-btn.selected .option-icon { background-color: var(--accent); color: #000; }
     .option-icon svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 
     .field-label { font-size: 14px; margin-bottom: 6px; display: block; color: var(--body-text); }
@@ -378,9 +407,9 @@
     .footer-contact-item { display: flex; flex-flow: column; grid-row-gap: 6px; }
     .footer-links { display: flex; flex-flow: column; grid-row-gap: 12px; }
     .white-link { color: var(--body-text-white); transition: color .2s; }
-    .white-link:hover { color: var(--white); }
+    .white-link:hover { color: var(--accent); }
     .arrow-hover-link { display: flex; align-items: center; grid-column-gap: 6px; color: var(--body-text-white); transition: color .2s; }
-    .arrow-hover-link:hover { color: var(--white); }
+    .arrow-hover-link:hover { color: var(--accent); }
     .arrow-hover-icon { width: 16px; }
     .footer-bottom { display: flex; flex-flow: column; grid-row-gap: 24px; }
     .footer-large-logo { width: 100%; display: block; }
@@ -407,20 +436,12 @@
       <div class="grid-hero">
 
         <div class="hero-left fade-in-first">
-          <h1 class="title-large">Deine Agentur für Apps, die funktionieren. Modern, schnell, stressfrei.</h1>
+          <h1 class="title-large">Deine Agentur für Apps, die <span class="highlight">funktionieren</span>. Modern, schnell, stressfrei.</h1>
           <div class="large-text body-text content-short">Wie viele Stunden verliert Dein Team jede Woche an manuelle Prozesse? Beantworte 5 kurze Fragen und Du bekommst in 24&nbsp;Stunden eine ehrliche Einschätzung – kostenlos.</div>
           <div class="list">
-            <div class="body-text">✓&nbsp;&nbsp;Antwort innerhalb von 24 Stunden</div>
-            <div class="body-text">✓&nbsp;&nbsp;Kostenlos, unverbindlich, kein Verkaufsgespräch</div>
-            <div class="body-text">✓&nbsp;&nbsp;FlutterFlow Agency Partner aus Hamburg</div>
-          </div>
-        </div>
-
-        <div class="hero-phone fade-in-third">
-          <div class="zoom-out-image-wrapper">
-            <img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1)-p-800.png"
-                 alt="App-Entwicklung von Innovarco"
-                 srcset="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1)-p-500.png 500w, https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1)-p-800.png 800w"/>
+            <div class="body-text"><span class="tick">✓</span>Antwort innerhalb von 24 Stunden</div>
+            <div class="body-text"><span class="tick">✓</span>Kostenlos, unverbindlich, kein Verkaufsgespräch</div>
+            <div class="body-text"><span class="tick">✓</span>FlutterFlow Agency Partner aus Hamburg</div>
           </div>
         </div>
 
@@ -545,6 +566,7 @@
 
               <!-- Erfolg -->
               <div class="form-success" id="formSuccess">
+                <div style="width:52px;height:52px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px;">✓</div>
                 <div class="title-small">Moin &amp; danke!</div>
                 <div class="large-text body-text" style="margin-top:12px;">Wir haben Dein Vorhaben erhalten und melden uns innerhalb von 24 Stunden bei Dir – per E-Mail oder Telefon.</div>
               </div>
@@ -648,10 +670,10 @@
                 <div class="title-small">Justmatch – Recruiting neu gedacht</div>
                 <div class="subheading muted-text">Für Justmatch, ein visionäres Recruiting-Tool, haben wir eine digitale Lösung entwickelt, die den konservativen Markt revolutioniert. Die Plattform nutzt modernste KI und BigData, um Kandidaten und Unternehmen intelligent zusammenzubringen.</div>
                 <div class="result-list">
-                  <div class="body-text">✓&nbsp;&nbsp;Komplette Plattform – von der Analyse bis zum Launch aus einer Hand</div>
-                  <div class="body-text">✓&nbsp;&nbsp;KI-gestütztes Matching statt tagelanger manueller Vorauswahl</div>
-                  <div class="body-text">✓&nbsp;&nbsp;Live in Wochen dank FlutterFlow – nicht in Monaten</div>
-                  <div class="body-text">✓&nbsp;&nbsp;Nach dem Launch: proaktive Wartung &amp; laufender Support</div>
+                  <div class="body-text"><span class="tick">✓</span>Komplette Plattform – von der Analyse bis zum Launch aus einer Hand</div>
+                  <div class="body-text"><span class="tick">✓</span>KI-gestütztes Matching statt tagelanger manueller Vorauswahl</div>
+                  <div class="body-text"><span class="tick">✓</span>Live in Wochen dank FlutterFlow – nicht in Monaten</div>
+                  <div class="body-text"><span class="tick">✓</span>Nach dem Launch: proaktive Wartung &amp; laufender Support</div>
                 </div>
                 <div class="inline-cta">
                   <a href="#kontakt" class="button">Ähnliches Projekt? Lass uns sprechen</a>
