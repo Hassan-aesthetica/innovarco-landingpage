@@ -25,7 +25,6 @@
       --dark: #000;
       --white: white;
       --button-radius: 4px;
-      --white-element-bg: #ffffff2b;
       --default-radius: 6px;
       --border-dark: #0000001f;
       --border-white: #fff3;
@@ -70,8 +69,8 @@
       .subheading   { font-size: 20px; }
     }
     @media (max-width: 479px) {
-      .title-huge  { font-size: 64px; }
-      .title-large { font-size: 33px; }
+      .title-huge  { font-size: 56px; }
+      .title-large { font-size: 31px; }
     }
 
     /* ---------- Layout ---------- */
@@ -81,9 +80,11 @@
       margin-left: auto; margin-right: auto;
       padding-left: 24px; padding-right: 24px;
     }
+    @media (max-width: 479px) { .container---main { padding-left: 18px; padding-right: 18px; } }
     .section { display: flex; flex-flow: column; padding-top: 36px; padding-bottom: 96px; overflow: hidden; }
-    @media (max-width: 767px) { .section { padding-top: 72px; padding-bottom: 72px; } }
+    @media (max-width: 767px) { .section { padding-top: 24px; padding-bottom: 60px; } }
     .vertical-section { display: flex; flex-flow: column; grid-row-gap: 72px; }
+    @media (max-width: 767px) { .vertical-section { grid-row-gap: 48px; } }
     .section-title { display: flex; flex-flow: column; grid-row-gap: 18px; }
     .content-short  { width: 100%; max-width: 468px; }
     .content-medium { width: 100%; max-width: 714px; }
@@ -94,37 +95,64 @@
       justify-content: center; align-items: center;
       height: 70px; display: flex;
       position: sticky; top: 0; z-index: 100;
+      border-bottom: 1px solid var(--border-dark);
     }
     .navbar-row { display: flex; flex: 1; justify-content: space-between; align-items: center; grid-column-gap: 16px; }
     .nav-logo { font-size: 20px; letter-spacing: .01em; }
-    .nav-links { display: flex; grid-column-gap: 12px; }
+    .nav-links { display: flex; align-items: center; grid-column-gap: 12px; }
     .nav-link-2 {
-      display: flex; align-items: center; grid-column-gap: 6px;
+      display: flex; align-items: center;
       color: #000; border-radius: 4px;
       padding: 9px 18px; transition: background-color .2s;
     }
     .nav-link-2:hover { background-color: var(--neutral-1); }
-    @media (max-width: 479px) {
-      .nav-links { grid-column-gap: 0; }
-      .nav-link-2 { padding: 9px 10px; }
+    @media (max-width: 767px) { .nav-link-2 { display: none; } }
+
+    /* ---------- Buttons ---------- */
+    .button {
+      display: inline-block;
+      background-color: var(--dark);
+      color: var(--white);
+      border: 0; cursor: pointer;
+      border-radius: var(--button-radius);
+      font-family: var(--font-family);
+      font-size: 16px; line-height: 1.4em;
+      padding: 18px 36px;
+      transition: opacity .2s;
+      text-align: center;
     }
+    .button:hover { opacity: .8; }
+    .button.small { padding: 12px 24px; }
+    @media (max-width: 479px) { .button.small { padding: 10px 16px; font-size: 14px; } }
 
     /* ---------- Hero ---------- */
     .grid-hero {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-column-gap: 24px; grid-row-gap: 24px;
-      place-items: end start;
+      grid-column-gap: 48px; grid-row-gap: 36px;
+      align-items: start;
     }
-    @media (max-width: 767px) { .grid-hero { display: flex; flex-flow: column; align-items: stretch; } }
+    @media (max-width: 991px) { .grid-hero { grid-template-columns: 1fr; } }
+    .hero-left { display: flex; flex-flow: column; grid-row-gap: 30px; }
+    .hero-phone { grid-column: 1; max-width: 380px; width: 70%; }
+    .hero-form-col { grid-column: 2; grid-row: 1 / span 2; }
+    @media (max-width: 991px) { .hero-phone { max-width: 280px; width: 100%; order: 3; margin-top: 12px; } }
     .zoom-out-image-wrapper {
       border-radius: var(--default-radius);
-      width: 100%; position: relative; overflow: hidden;
+      position: relative; overflow: hidden;
     }
     .zoom-out-image-wrapper img { width: 100%; display: block; transform: scale(1.2); }
-    .align-bottom { align-self: end; }
+    .list { display: flex; flex-flow: column; grid-row-gap: 8px; }
+    .hero-note { color: var(--body-text); font-size: 14px; }
 
-    /* Ladeanimationen wie im Original (fade-in-first/second/third) */
+    /* Mobile: Reihenfolge Headline -> Formular -> Bild */
+    @media (max-width: 991px) {
+      .grid-hero { display: flex; flex-flow: column; }
+      .hero-left { order: 1; }
+      .hero-form-col { order: 2; }
+    }
+
+    /* Ladeanimationen wie im Original */
     .fade-in-first, .fade-in-second, .fade-in-third { opacity: 0; }
     .loaded .fade-in-first  { animation: fadeInUp .8s ease .1s forwards; }
     .loaded .fade-in-second { animation: fadeInUp .8s ease .35s forwards; }
@@ -132,8 +160,6 @@
     .loaded .zoom-out-image-wrapper img { animation: zoomOut 1.6s cubic-bezier(.25,.46,.45,.94) .1s forwards; }
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes zoomOut  { from { transform: scale(1.2); } to { transform: scale(1); } }
-
-    /* Scroll-Einblendungen */
     .fade-in-on-scroll { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s ease; }
     .fade-in-on-scroll.visible { opacity: 1; transform: none; }
     @media (prefers-reduced-motion: reduce) {
@@ -141,7 +167,66 @@
       .zoom-out-image-wrapper img { transform: none !important; animation: none !important; }
     }
 
-    /* ---------- Ethos / Metriken ---------- */
+    /* ---------- Multi-Step-Formular ---------- */
+    .form-card {
+      border-radius: var(--default-radius);
+      background-color: var(--neutral-1);
+      padding: 24px;
+      width: 100%;
+    }
+    @media (min-width: 992px) { .form-card { position: sticky; top: 94px; } }
+    .progress-row { display: flex; justify-content: space-between; align-items: center; margin: 18px 0 10px; }
+    .progress-label { font-size: 13px; color: var(--body-text); }
+    .progress-track { height: 3px; background-color: var(--border-dark); border-radius: 2px; overflow: hidden; margin-bottom: 24px; }
+    .progress-fill { height: 100%; background-color: var(--dark); width: 20%; transition: width .35s ease; }
+
+    .form-step { display: none; }
+    .form-step.active { display: flex; flex-flow: column; grid-row-gap: 16px; animation: stepIn .35s ease; }
+    @keyframes stepIn { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: none; } }
+
+    .step-question { font-size: 20px; line-height: 1.35em; }
+    .option-grid { display: flex; flex-flow: column; grid-row-gap: 10px; }
+    .option-btn {
+      font-family: var(--font-family);
+      font-size: 16px; line-height: 1.4em;
+      text-align: left;
+      background-color: var(--white);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--button-radius);
+      padding: 16px;
+      cursor: pointer;
+      transition: border-color .15s, background-color .15s, color .15s;
+    }
+    .option-btn:hover { border-color: #000; }
+    .option-btn.selected { background-color: var(--dark); border-color: var(--dark); color: var(--white); }
+
+    .field-label { font-size: 14px; margin-bottom: 6px; display: block; color: var(--body-text); }
+    .text-field {
+      width: 100%;
+      font-family: var(--font-family);
+      font-size: 16px; line-height: 1.4em;
+      color: var(--dark);
+      background-color: var(--white);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--button-radius);
+      padding: 14px 16px;
+    }
+    .text-field:focus { outline: none; border-color: #000; }
+    textarea.text-field { min-height: 110px; resize: vertical; }
+    .checkbox-row { display: flex; grid-column-gap: 10px; align-items: flex-start; }
+    .checkbox-row input { margin-top: 3px; accent-color: #000; }
+    .checkbox-label { color: var(--body-text); font-size: 13px; line-height: 1.4em; }
+
+    .step-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
+    .back-link {
+      font-family: var(--font-family); font-size: 14px;
+      color: var(--body-text); background: none; border: 0;
+      cursor: pointer; padding: 8px 0;
+    }
+    .back-link:hover { color: var(--dark); }
+    .form-success { display: none; padding: 12px 0; }
+
+    /* ---------- Boxen / Metriken ---------- */
     .ethos-boxes {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -151,13 +236,11 @@
     @media (max-width: 767px) { .ethos-boxes { grid-template-columns: 1fr; } }
     .ethos-box {
       display: flex; flex-flow: column;
-      grid-row-gap: 96px;
+      grid-row-gap: 72px;
       border-radius: var(--default-radius);
       background-color: var(--neutral-1);
       padding: 24px;
     }
-    @media (max-width: 991px) { .ethos-box { grid-row-gap: 72px; } }
-    .ethos-box-text { max-width: 714px; }
     .metric-aligned-bottom {
       display: grid;
       grid-template-columns: auto 1fr;
@@ -166,25 +249,52 @@
       margin-top: auto;
     }
     .metric-explainer { max-width: 250px; }
+    .inline-cta { display: flex; flex-wrap: wrap; align-items: center; grid-column-gap: 18px; grid-row-gap: 12px; }
 
     /* ---------- Flutterflow-Slide ---------- */
     .quote-slide {
       border-radius: var(--default-radius);
       color: var(--white);
-      background-color: #114ede;
       display: flex; flex-flow: column;
       justify-content: space-between; align-items: flex-start;
-      height: 600px; padding: 24px;
-    }
-    .quote-slide.slide-2 {
+      height: 480px; padding: 24px;
       background-color: #4b39ef;
       background-image: linear-gradient(45deg, #4b39ef, #fff);
     }
+    @media (max-width: 767px) { .quote-slide { height: 400px; } }
     .quote-author-centered { display: flex; align-items: center; grid-column-gap: 18px; }
     .customer-small { border-radius: var(--default-radius); max-height: 72px; }
     .long-text { max-width: 714px; }
 
-    /* ---------- Accordions (Prozess & FAQ) ---------- */
+    /* ---------- Referenzen / Projekt ---------- */
+    .project-card {
+      border-radius: var(--default-radius);
+      background-color: var(--neutral-1);
+      overflow: hidden;
+    }
+    .project-body {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      grid-column-gap: 48px; grid-row-gap: 36px;
+      padding: 36px 24px;
+    }
+    @media (max-width: 767px) { .project-body { grid-template-columns: 1fr; padding: 24px 18px; } }
+    .project-meta { display: flex; flex-flow: column; grid-row-gap: 24px; }
+    .project-meta-item { display: flex; flex-flow: column; grid-row-gap: 4px; }
+    .meta-label { color: var(--body-text); font-size: 13px; }
+    .tag-row { display: flex; flex-wrap: wrap; grid-column-gap: 8px; grid-row-gap: 8px; }
+    .tag {
+      border: 1px solid var(--border-dark);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 13px;
+      background-color: var(--white);
+    }
+    .project-text { display: flex; flex-flow: column; grid-row-gap: 24px; }
+    .result-list { display: flex; flex-flow: column; grid-row-gap: 10px; }
+    .arrow-link-dark { display: inline-flex; align-items: center; grid-column-gap: 6px; text-decoration: underline; }
+
+    /* ---------- Accordions ---------- */
     .process-list { display: flex; flex-flow: column; grid-row-gap: 6px; align-self: stretch; }
     .accordion-panel {
       border-radius: var(--default-radius);
@@ -202,7 +312,6 @@
     .accordion-content-wrapper { overflow: hidden; max-height: 0; transition: max-height .45s ease; }
     .accordion-content { padding: 0 18px 24px; }
     .process-text { display: flex; flex-flow: column; grid-row-gap: 18px; max-width: 714px; }
-    .list { display: flex; flex-flow: column; grid-row-gap: 6px; }
 
     /* ---------- Technologie-Marquee ---------- */
     .marquee { display: flex; overflow: hidden; }
@@ -220,111 +329,35 @@
       grid-row-gap: 16px;
       border-radius: var(--default-radius);
       background-color: var(--neutral-1);
-      height: 350px; width: 350px; padding: 18px;
+      height: 300px; width: 300px; padding: 18px;
       flex-shrink: 0;
     }
-    @media (max-width: 767px) { .expertise-card { height: 260px; width: 260px; } }
-    .expertise-card-image { width: 160px; height: 160px; object-fit: contain; }
-    @media (max-width: 767px) { .expertise-card-image { width: 110px; height: 110px; } }
+    @media (max-width: 767px) { .expertise-card { height: 220px; width: 220px; } }
+    .expertise-card-image { width: 130px; height: 130px; object-fit: contain; }
+    @media (max-width: 767px) { .expertise-card-image { width: 95px; height: 95px; } }
 
-    /* ---------- Formular-Karte im Hero ---------- */
-    .form-card {
-      border-radius: var(--default-radius);
-      background-color: var(--neutral-1);
-      padding: 24px;
-      width: 100%;
-    }
-
-    /* ---------- Referenzen / Projekt ---------- */
-    .project-card {
-      border-radius: var(--default-radius);
-      background-color: var(--neutral-1);
-      overflow: hidden;
-    }
-    .project-hero-image { width: 100%; display: block; }
-    .project-body {
-      display: grid;
-      grid-template-columns: .8fr 1.2fr;
-      grid-column-gap: 48px; grid-row-gap: 36px;
-      padding: 36px 24px;
-    }
-    @media (max-width: 767px) { .project-body { grid-template-columns: 1fr; } }
-    .project-meta { display: flex; flex-flow: column; grid-row-gap: 24px; }
-    .project-meta-item { display: flex; flex-flow: column; grid-row-gap: 4px; }
-    .meta-label { color: var(--body-text); font-size: 13px; }
-    .tag-row { display: flex; flex-wrap: wrap; grid-column-gap: 8px; grid-row-gap: 8px; }
-    .tag {
-      border: 1px solid var(--border-dark);
-      border-radius: 999px;
-      padding: 6px 14px;
-      font-size: 13px;
-      background-color: var(--white);
-    }
-    .project-text { display: flex; flex-flow: column; grid-row-gap: 24px; }
-    .result-list { display: flex; flex-flow: column; grid-row-gap: 10px; }
-    .arrow-link-dark { display: inline-flex; align-items: center; grid-column-gap: 6px; text-decoration: underline; }
-
-    /* ---------- CTA-Buttons ---------- */
-    .button.small { padding: 12px 24px; }
-    .nav-cta { margin-left: 6px; }
-    @media (max-width: 479px) { .nav-cta { padding: 10px 14px; } }
-    .hero-cta-row { display: flex; flex-wrap: wrap; align-items: center; grid-column-gap: 18px; grid-row-gap: 12px; margin-top: 30px; }
-    .hero-note { color: var(--body-text); font-size: 14px; }
-    .inline-cta { display: flex; flex-wrap: wrap; align-items: center; grid-column-gap: 18px; grid-row-gap: 12px; }
-
-    /* ---------- CTA / Formular ---------- */
+    /* ---------- Abschluss-CTA ---------- */
     .cta-card {
       border-radius: var(--default-radius);
       background-color: var(--neutral-1);
-      padding: 36px 36px 48px;
+      padding: 36px 24px 48px;
       display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      grid-column-gap: 48px; grid-row-gap: 48px;
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: 48px; grid-row-gap: 36px;
     }
     @media (max-width: 991px) { .cta-card { grid-template-columns: 1fr; } }
-    .cta-left { display: flex; flex-flow: column; justify-content: space-between; grid-row-gap: 48px; }
-    .button {
-      display: inline-block;
-      background-color: var(--dark);
-      color: var(--white);
-      border: 0; cursor: pointer;
-      border-radius: var(--button-radius);
-      font-family: var(--font-family);
-      font-size: 16px; line-height: 1.4em;
-      padding: 24px 48px;
-      transition: opacity .2s;
-      text-align: center;
-    }
-    .button:hover { opacity: .8; }
-    .form { display: flex; flex-flow: column; grid-row-gap: 18px; }
-    .field-label { font-size: 16px; margin-bottom: 6px; display: block; }
-    .text-field {
-      width: 100%;
-      font-family: var(--font-family);
-      font-size: 16px; line-height: 1.4em;
-      color: var(--dark);
-      background-color: var(--white);
-      border: 1px solid var(--border-dark);
-      border-radius: var(--button-radius);
-      padding: 14px 16px;
-    }
-    .text-field:focus { outline: none; border-color: #000; }
-    textarea.text-field { min-height: 120px; resize: vertical; }
-    .checkbox-label { color: var(--body-text); max-width: 468px; font-size: 13px; line-height: 1.4em; }
-    .checkbox-row { display: flex; grid-column-gap: 10px; align-items: flex-start; }
-    .checkbox-row input { margin-top: 3px; accent-color: #000; }
-    .form-success { display: none; padding: 24px 0; }
 
     /* ---------- FAQ ---------- */
     .faq-grid { display: grid; grid-template-columns: .6fr 1.4fr; grid-column-gap: 24px; grid-row-gap: 48px; }
     @media (max-width: 767px) { .faq-grid { grid-template-columns: 1fr; } }
-    .faq-list { display: flex; flex-flow: column; grid-row-gap: 24px; }
-    .faq-list .accordion-title { padding: 24px; }
-    .faq-list .accordion-content { padding: 0 24px 24px; }
+    .faq-list { display: flex; flex-flow: column; grid-row-gap: 18px; }
+    .faq-list .accordion-title { padding: 24px 18px; }
+    .faq-list .accordion-content { padding: 0 18px 24px; }
 
     /* ---------- Footer ---------- */
     .footer { background-color: var(--dark); color: var(--white); padding-top: 96px; padding-bottom: 96px; }
     .footer-wrapper { display: flex; flex-flow: column; grid-row-gap: 144px; }
+    @media (max-width: 767px) { .footer-wrapper { grid-row-gap: 72px; } }
     .footer-menus-grid { display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 24px; grid-row-gap: 24px; }
     @media (max-width: 479px) { .footer-menus-grid { grid-template-columns: 1fr; } }
     .footer-contact-group { display: flex; flex-flow: column; grid-row-gap: 24px; }
@@ -349,138 +382,170 @@
       <nav class="nav-links">
         <a href="#referenzen" class="nav-link-2">Referenzen</a>
         <a href="#prozess" class="nav-link-2">Prozess</a>
-        <a href="#kontakt" class="button small nav-cta">Kostenlose Erstberatung</a>
+        <a href="#kontakt" class="button small">Jetzt anfragen</a>
       </nav>
     </div>
   </div>
 
-  <!-- ================= HERO MIT FORMULAR ================= -->
-  <section class="section" id="top">
+  <!-- ================= HERO MIT MULTI-STEP-FORMULAR ================= -->
+  <section class="section" id="top" style="padding-top:60px;">
     <div class="container---main">
       <div class="grid-hero">
-        <div class="fade-in-first align-bottom">
+
+        <div class="hero-left fade-in-first">
           <h1 class="title-large">Deine Agentur für Apps, die funktionieren. Modern, schnell, stressfrei.</h1>
-          <div class="large-text body-text content-short" style="margin-top:18px;">Wie viele Stunden verliert Dein Team jede Woche an manuelle Abläufe? Welcher Prozess nervt Dich am meisten – Excel-Listen, doppelte Dateneingabe, Zettelwirtschaft? Genau da setzen wir an: als Dein FlutterFlow Agency Partner aus Hamburg.</div>
-          <div class="list" style="margin-top:24px;">
+          <div class="large-text body-text content-short">Wie viele Stunden verliert Dein Team jede Woche an manuelle Prozesse? Beantworte 5 kurze Fragen und Du bekommst in 24&nbsp;Stunden eine ehrliche Einschätzung – kostenlos.</div>
+          <div class="list">
             <div class="body-text">✓&nbsp;&nbsp;Antwort innerhalb von 24 Stunden</div>
             <div class="body-text">✓&nbsp;&nbsp;Kostenlos, unverbindlich, kein Verkaufsgespräch</div>
-            <div class="body-text">✓&nbsp;&nbsp;Du sprichst direkt mit den Machern</div>
+            <div class="body-text">✓&nbsp;&nbsp;FlutterFlow Agency Partner aus Hamburg</div>
           </div>
         </div>
-        <div class="fade-in-second" style="align-self:stretch;width:100%;">
+
+        <div class="hero-phone fade-in-third">
+          <div class="zoom-out-image-wrapper">
+            <img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1)-p-800.png"
+                 alt="App-Entwicklung von Innovarco"
+                 srcset="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1)-p-500.png 500w, https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1)-p-800.png 800w"/>
+          </div>
+        </div>
+
+        <div class="hero-form-col fade-in-second">
           <div class="form-card" id="kontakt">
             <div class="title-small">Was ist Dein Vorhaben?</div>
-            <div class="body-text" style="margin-top:6px;margin-bottom:24px;">Vier kurze Fragen – mehr brauchen wir nicht, um Dir in 24&nbsp;Stunden eine ehrliche Einschätzung zu geben.</div>
-            <form class="form" id="leadForm" novalidate>
-              <div id="formFields" class="form">
+            <div class="progress-row">
+              <div class="progress-label" id="stepLabel">Schritt 1 von 5</div>
+              <div class="progress-label">≈ 2 Minuten</div>
+            </div>
+            <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+            <form id="leadForm" novalidate>
+
+              <!-- Schritt 1 -->
+              <div class="form-step active" data-step="1">
+                <div class="step-question">Was möchtest Du digitalisieren oder bauen?</div>
+                <div class="option-grid" data-field="vorhaben_typ">
+                  <button type="button" class="option-btn">Interne Prozesse automatisieren</button>
+                  <button type="button" class="option-btn">Eine neue App-Idee umsetzen</button>
+                  <button type="button" class="option-btn">Bestehende Software verbessern</button>
+                  <button type="button" class="option-btn">Noch unklar – ich brauche Beratung</button>
+                </div>
+              </div>
+
+              <!-- Schritt 2 -->
+              <div class="form-step" data-step="2">
+                <div class="step-question">Wann soll Dein Projekt starten?</div>
+                <div class="option-grid" data-field="zeitrahmen">
+                  <button type="button" class="option-btn">So schnell wie möglich</button>
+                  <button type="button" class="option-btn">In den nächsten 1–3 Monaten</button>
+                  <button type="button" class="option-btn">In 3–6 Monaten</button>
+                  <button type="button" class="option-btn">Ich informiere mich erst einmal</button>
+                </div>
+                <div class="step-nav"><button type="button" class="back-link">← Zurück</button></div>
+              </div>
+
+              <!-- Schritt 3 -->
+              <div class="form-step" data-step="3">
+                <div class="step-question">Welches Budget hast Du ungefähr eingeplant?</div>
+                <div class="option-grid" data-field="budget">
+                  <button type="button" class="option-btn">Unter 10.000 €</button>
+                  <button type="button" class="option-btn">10.000 – 25.000 €</button>
+                  <button type="button" class="option-btn">Über 25.000 €</button>
+                  <button type="button" class="option-btn">Noch offen – beratet mich</button>
+                </div>
+                <div class="step-nav"><button type="button" class="back-link">← Zurück</button></div>
+              </div>
+
+              <!-- Schritt 4 -->
+              <div class="form-step" data-step="4">
+                <div class="step-question">Beschreib Dein Vorhaben in 1–2 Sätzen.</div>
+                <div>
+                  <textarea class="text-field" id="vorhaben" name="vorhaben" placeholder="Welcher Prozess soll einfacher werden? Was soll die App können?"></textarea>
+                  <div class="hero-note" style="margin-top:6px;">Optional – hilft uns aber, Dir eine konkretere Einschätzung zu geben.</div>
+                </div>
+                <div class="step-nav">
+                  <button type="button" class="back-link">← Zurück</button>
+                  <button type="button" class="button" id="toStep5">Weiter →</button>
+                </div>
+              </div>
+
+              <!-- Schritt 5 -->
+              <div class="form-step" data-step="5">
+                <div class="step-question">Fast geschafft – wohin dürfen wir Deine Einschätzung schicken?</div>
                 <div>
                   <label class="field-label" for="name">Wie heißt Du?</label>
                   <input class="text-field" type="text" id="name" name="name" placeholder="Vor- und Nachname" autocomplete="name" required/>
                 </div>
                 <div>
-                  <label class="field-label" for="email">Wie erreichen wir Dich per E-Mail?</label>
+                  <label class="field-label" for="email">Deine E-Mail-Adresse</label>
                   <input class="text-field" type="email" id="email" name="email" placeholder="name@firma.de" autocomplete="email" required/>
                 </div>
                 <div>
-                  <label class="field-label" for="phone">Unter welcher Nummer können wir Dich anrufen?</label>
+                  <label class="field-label" for="phone">Deine Telefonnummer</label>
                   <input class="text-field" type="tel" id="phone" name="phone" placeholder="+49 40 123456" autocomplete="tel" required/>
-                </div>
-                <div>
-                  <label class="field-label" for="vorhaben">Was möchtest Du digitalisieren oder bauen?</label>
-                  <textarea class="text-field" id="vorhaben" name="vorhaben" placeholder="Welcher Prozess soll einfacher werden? Ein paar Sätze genügen." required></textarea>
                 </div>
                 <label class="checkbox-row">
                   <input type="checkbox" name="consent" required/>
                   <span class="checkbox-label">Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert und verwendet werden. Weitere Informationen in der <a href="https://www.innovarco.de/utilities/privacy-policy" style="text-decoration:underline;">Datenschutzerklärung</a>.</span>
                 </label>
-                <button type="submit" class="button">Kostenlose Erstberatung anfragen</button>
+                <button type="submit" class="button">Kostenlose Einschätzung anfragen</button>
                 <div class="hero-note">🔒 Vertraulich · Keine Weitergabe Deiner Daten · Antwort in 24&nbsp;h</div>
+                <div class="step-nav"><button type="button" class="back-link">← Zurück</button></div>
               </div>
+
+              <!-- Erfolg -->
               <div class="form-success" id="formSuccess">
                 <div class="title-small">Moin &amp; danke!</div>
-                <div class="large-text body-text" style="margin-top:12px;">Wir haben Dein Vorhaben erhalten und melden uns innerhalb von 24 Stunden bei Dir.</div>
+                <div class="large-text body-text" style="margin-top:12px;">Wir haben Dein Vorhaben erhalten und melden uns innerhalb von 24 Stunden bei Dir – per E-Mail oder Telefon.</div>
               </div>
+
             </form>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ================= HERO-BILD ================= -->
-  <section class="section" style="padding-bottom:36px;">
-    <div class="container---main">
-      <div class="fade-in-third">
-        <div class="zoom-out-image-wrapper">
-          <img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1).png"
-               alt="App-Entwicklung von Innovarco"
-               sizes="(max-width: 1920px) 100vw, 1920px"
-               srcset="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1)-p-500.png 500w, https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1)-p-800.png 800w, https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1)-p-1080.png 1080w, https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1)-p-1600.png 1600w, https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1).png 1920w"/>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= EFFIZIENZ / METRIKEN ================= -->
+  <!-- ================= METRIKEN ================= -->
   <section class="section">
     <div class="container---main">
       <div class="fade-in-third">
         <div class="vertical-section">
-          <div class="title-large">Mehr Effizienz. Weniger Kosten.</div>
-          <div class="large-text content-short">Wir digitalisieren Prozesse, damit Dein Unternehmen schneller, smarter und kosteneffizienter arbeitet.</div>
+          <div class="section-title">
+            <div class="title-large">Mehr Effizienz. Weniger Kosten.</div>
+            <div class="large-text content-short">Wir digitalisieren Prozesse, damit Dein Unternehmen schneller, smarter und kosteneffizienter arbeitet.</div>
+          </div>
           <div class="ethos-boxes">
             <div class="ethos-box">
-              <div class="ethos-box-text">
-                <div class="subheading muted-text">Wie oft tippt Dein Team dieselben Daten doppelt ein – in Excel, per E-Mail, ins System? Automatisierte Workflows machen damit Schluss.</div>
-              </div>
+              <div class="subheading muted-text">Wie oft tippt Dein Team dieselben Daten doppelt ein – in Excel, per E-Mail, ins System? Automatisierte Workflows machen damit Schluss.</div>
               <div class="metric-aligned-bottom">
                 <div class="title-huge">60%</div>
                 <div class="metric-explainer">Zeiteinsparung bei Prozessen</div>
               </div>
             </div>
             <div class="ethos-box">
-              <div class="ethos-box-text">
-                <div class="subheading muted-text">Wie viel kostet Dich Papierkram wirklich – in Fehlern, Suchzeiten und Nerven? Digitale Prozesse sparen messbar Ressourcen.</div>
-              </div>
+              <div class="subheading muted-text">Wie viel kostet Dich Papierkram wirklich – in Fehlern, Suchzeiten und Nerven? Digitale Prozesse sparen messbar Ressourcen.</div>
               <div class="metric-aligned-bottom">
                 <div class="title-huge">30%</div>
                 <div class="metric-explainer">geringere Betriebskosten</div>
               </div>
             </div>
             <div class="ethos-box">
-              <div class="ethos-box-text">
-                <div class="subheading muted-text">Wie lange wartest Du auf Zahlen, bevor Du entscheiden kannst? Mit Echtzeit-Daten aus einer zentralen Plattform entscheidest Du sofort.</div>
-              </div>
+              <div class="subheading muted-text">Wie lange wartest Du auf Zahlen, bevor Du entscheiden kannst? Mit Echtzeit-Daten aus einer zentralen Plattform entscheidest Du sofort.</div>
               <div class="metric-aligned-bottom">
                 <div class="title-huge">50%</div>
                 <div class="metric-explainer">schnellere interne Entscheidungsprozesse</div>
               </div>
             </div>
             <div class="ethos-box" style="justify-content:space-between;">
-              <div class="ethos-box-text">
-                <div class="subheading">Hast Du Dich in einer dieser Fragen wiedererkannt? Dann lass uns über Deinen konkreten Fall sprechen – kostenlos und unverbindlich.</div>
-              </div>
+              <div class="subheading">Hast Du Dich in einer dieser Fragen wiedererkannt? Dann lass uns über Deinen konkreten Fall sprechen.</div>
               <div class="inline-cta">
-                <a href="#kontakt" class="button">Ja – Potenzial-Check anfragen</a>
-                <div class="hero-note">Dauert 2 Minuten</div>
+                <a href="#kontakt" class="button">Ja – Potenzial-Check starten</a>
+                <div class="hero-note">5 Fragen · 2 Minuten</div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= FLUTTERFLOW ================= -->
-  <section class="section">
-    <div class="container---main">
-      <div class="quote-slide slide-2 fade-in-on-scroll">
-        <div class="quote-author-centered">
-          <img alt="Flutterflow Logo" src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09d15de2c58228dd3ea1c_logo_flutterflow.svg" class="customer-small"/>
-          <div>Flutterflow × Innovarco</div>
-        </div>
-        <div class="content-medium">
-          <div class="title-medium long-text">Innovarco – Dein Flutterflow Agency Partner – realisiert effizient mobile und webbasierte Anwendungen.</div>
         </div>
       </div>
     </div>
@@ -537,24 +602,13 @@
             </div>
           </div>
 
-          <div class="ethos-boxes">
-            <div class="ethos-box">
-              <div class="ethos-box-text">
-                <div class="subheading muted-text">Ein Team, ein Ansprechpartner: Projektmanagement, Design, Entwicklung, Hosting und Wartung – wir decken den ganzen Software-Lifecycle ab.</div>
-              </div>
-              <div class="metric-aligned-bottom">
-                <div class="title-huge">100%</div>
-                <div class="metric-explainer">aus einer Hand – von der Idee bis zum Betrieb</div>
-              </div>
+          <div class="quote-slide">
+            <div class="quote-author-centered">
+              <img alt="Flutterflow Logo" src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09d15de2c58228dd3ea1c_logo_flutterflow.svg" class="customer-small"/>
+              <div>Flutterflow × Innovarco</div>
             </div>
-            <div class="ethos-box">
-              <div class="ethos-box-text">
-                <div class="subheading muted-text">Als FlutterFlow Agency Partner entwickeln wir mobile und webbasierte Apps in einem Bruchteil klassischer Entwicklungszeit.</div>
-              </div>
-              <div class="metric-aligned-bottom">
-                <div class="title-huge">24h</div>
-                <div class="metric-explainer">bis zu unserer Antwort auf Deine Anfrage</div>
-              </div>
+            <div class="content-medium">
+              <div class="title-medium long-text">Innovarco – Dein Flutterflow Agency Partner – realisiert effizient mobile und webbasierte Anwendungen.</div>
             </div>
           </div>
 
@@ -695,8 +749,7 @@
         </div>
       </div>
     </div>
-    <div class="marquee" style="margin-top:72px;">
-      <!-- Liste 1 -->
+    <div class="marquee" style="margin-top:60px;">
       <div class="collection-list">
         <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2fa388e58eb874cea399a_OpenAI-black-monoblossom.svg" alt="" class="expertise-card-image"/><div class="bold-text">OpenAI API</div></div>
         <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d4340f3a88d2cd9e861a97_api.svg" alt="" class="expertise-card-image"/><div class="bold-text">RESTful</div></div>
@@ -710,7 +763,6 @@
         <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2f6b73914bde8790694ac_supabase-logo-icon.svg" alt="" class="expertise-card-image"/><div class="bold-text">Supabase</div></div>
         <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2f67982d4f0916037bf01_logoMark_outlinePrimary_transparent.svg" alt="" class="expertise-card-image"/><div class="bold-text">Flutterflow</div></div>
       </div>
-      <!-- Liste 2 (Duplikat für Endlos-Loop) -->
       <div class="collection-list" aria-hidden="true">
         <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2fa388e58eb874cea399a_OpenAI-black-monoblossom.svg" alt="" class="expertise-card-image"/><div class="bold-text">OpenAI API</div></div>
         <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d4340f3a88d2cd9e861a97_api.svg" alt="" class="expertise-card-image"/><div class="bold-text">RESTful</div></div>
@@ -727,32 +779,23 @@
     </div>
   </section>
 
-  <!-- ================= CTA + FORMULAR ================= -->
+  <!-- ================= ABSCHLUSS-CTA ================= -->
   <section class="section">
     <div class="container---main">
       <div class="cta-card fade-in-on-scroll">
-        <div class="cta-left">
-          <div class="section-title">
-            <div class="title-large"><span class="muted-text">Bereit für Deine App?</span><br/>Lass uns sprechen.</div>
-            <div class="large-text content-short body-text">Schilder uns in zwei Minuten Dein Vorhaben – Du bekommst innerhalb von 24&nbsp;Stunden eine ehrliche Einschätzung zu Machbarkeit, Zeitrahmen und nächsten Schritten. Unverbindlich und kostenlos.</div>
-          </div>
-          <div class="list">
-            <div class="body-text">✓&nbsp;&nbsp;Kostenlose Erstberatung – kein Verkaufsgespräch</div>
-            <div class="body-text">✓&nbsp;&nbsp;Antwort innerhalb von 24 Stunden</div>
-            <div class="body-text">✓&nbsp;&nbsp;Du sprichst direkt mit den Machern, die Dein Projekt umsetzen</div>
-            <div class="body-text">✓&nbsp;&nbsp;Deine Daten bleiben vertraulich und werden nicht weitergegeben</div>
-          </div>
+        <div class="section-title">
+          <div class="title-large"><span class="muted-text">Bereit für Deine App?</span><br/>Lass uns sprechen.</div>
+          <div class="large-text content-short body-text">5 kurze Fragen, 2 Minuten – und Du weißt, was Deine App kostet, wie lange sie dauert und ob sie sich lohnt.</div>
         </div>
         <div class="project-text" style="justify-content:center;">
-          <div class="subheading">Frag Dich einmal ehrlich:</div>
           <div class="result-list">
             <div class="body-text">→&nbsp;&nbsp;Was kostet es Dich jeden Monat, dass dieser Prozess noch manuell läuft?</div>
             <div class="body-text">→&nbsp;&nbsp;Wie lange willst Du die Idee noch vor Dir herschieben?</div>
             <div class="body-text">→&nbsp;&nbsp;Was wäre, wenn Deine App in wenigen Wochen live ist?</div>
           </div>
           <div class="inline-cta">
-            <a href="#kontakt" class="button">Antworten holen – zum Formular</a>
-            <div class="hero-note">Dauert 2 Minuten</div>
+            <a href="#kontakt" class="button">Zum Formular – 2 Minuten</a>
+            <div class="hero-note">Kostenlos &amp; unverbindlich</div>
           </div>
         </div>
       </div>
@@ -823,27 +866,25 @@
   <section class="footer">
     <div class="container---main">
       <div class="footer-wrapper">
-        <div class="footer-top">
-          <div class="footer-menus-grid">
-            <div class="footer-contact-group">
-              <div class="footer-contact-item">
-                <div>Kontakt</div>
-                <a href="mailto:hitmeup@innovarco.de" class="arrow-hover-link">
-                  <img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67b88a7ccf01be83ee65e61f_interface-icon-arrow-right-dark.svg" alt="Arrow pointing right icon" class="arrow-hover-icon"/>
-                  <div>hitmeup@innovarco.de</div>
-                </a>
-              </div>
-              <div class="footer-contact-item">
-                <div>Adresse</div>
-                <div class="white-body-text">Abelke-Bleken-Ring 18a<br/>21037 Hamburg</div>
-              </div>
+        <div class="footer-menus-grid">
+          <div class="footer-contact-group">
+            <div class="footer-contact-item">
+              <div>Kontakt</div>
+              <a href="mailto:hitmeup@innovarco.de" class="arrow-hover-link">
+                <img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67b88a7ccf01be83ee65e61f_interface-icon-arrow-right-dark.svg" alt="Arrow pointing right icon" class="arrow-hover-icon"/>
+                <div>hitmeup@innovarco.de</div>
+              </a>
             </div>
-            <div class="footer-links">
-              <div>Direktlinks</div>
-              <a href="https://www.innovarco.de/utilities/imprint" class="white-link">Impressum</a>
-              <a href="https://www.innovarco.de/utilities/privacy-policy" class="white-link">Datenschutz</a>
-              <a href="#kontakt" class="white-link">Kontakt</a>
+            <div class="footer-contact-item">
+              <div>Adresse</div>
+              <div class="white-body-text">Abelke-Bleken-Ring 18a<br/>21037 Hamburg</div>
             </div>
+          </div>
+          <div class="footer-links">
+            <div>Direktlinks</div>
+            <a href="https://www.innovarco.de/utilities/imprint" class="white-link">Impressum</a>
+            <a href="https://www.innovarco.de/utilities/privacy-policy" class="white-link">Datenschutz</a>
+            <a href="#kontakt" class="white-link">Kontakt</a>
           </div>
         </div>
         <div class="footer-bottom">
@@ -859,29 +900,23 @@
   </section>
 
   <script>
-    // Ladeanimation (fade-in-first/second/third + Zoom-out des Hero-Bilds)
-    window.addEventListener("load", function () {
-      document.body.classList.add("loaded");
-    });
+    // Ladeanimationen
+    window.addEventListener("load", function () { document.body.classList.add("loaded"); });
 
     // Scroll-Einblendungen
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
+        if (entry.isIntersecting) { entry.target.classList.add("visible"); observer.unobserve(entry.target); }
       });
     }, { threshold: 0.12 });
     document.querySelectorAll(".fade-in-on-scroll").forEach(function (el) { observer.observe(el); });
 
-    // Accordions (Prozess + FAQ)
+    // Accordions
     document.querySelectorAll(".accordion-panel").forEach(function (panel) {
       var title = panel.querySelector(".accordion-title");
       var wrapper = panel.querySelector(".accordion-content-wrapper");
       title.addEventListener("click", function () {
-        var isOpen = panel.classList.contains("open");
-        if (isOpen) {
+        if (panel.classList.contains("open")) {
           wrapper.style.maxHeight = "0px";
           panel.classList.remove("open");
         } else {
@@ -891,8 +926,47 @@
       });
     });
 
+    // ============================================================
+    // Multi-Step-Formular
+    // ============================================================
+    var TOTAL_STEPS = 5;
+    var currentStep = 1;
+    var answers = {};
+
+    var stepLabel = document.getElementById("stepLabel");
+    var progressFill = document.getElementById("progressFill");
+
+    function showStep(n) {
+      currentStep = n;
+      document.querySelectorAll(".form-step").forEach(function (s) {
+        s.classList.toggle("active", parseInt(s.dataset.step, 10) === n);
+      });
+      stepLabel.textContent = "Schritt " + n + " von " + TOTAL_STEPS;
+      progressFill.style.width = (n / TOTAL_STEPS * 100) + "%";
+    }
+
+    // Options-Buttons: Auswahl speichern und automatisch weiter
+    document.querySelectorAll(".option-grid").forEach(function (grid) {
+      grid.querySelectorAll(".option-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          grid.querySelectorAll(".option-btn").forEach(function (b) { b.classList.remove("selected"); });
+          btn.classList.add("selected");
+          answers[grid.dataset.field] = btn.textContent.trim();
+          setTimeout(function () { if (currentStep < TOTAL_STEPS) showStep(currentStep + 1); }, 250);
+        });
+      });
+    });
+
+    // Zurück-Links
+    document.querySelectorAll(".back-link").forEach(function (btn) {
+      btn.addEventListener("click", function () { if (currentStep > 1) showStep(currentStep - 1); });
+    });
+
+    // Schritt 4 -> 5
+    document.getElementById("toStep5").addEventListener("click", function () { showStep(5); });
+
     // ------------------------------------------------------------
-    // Formular: Endpoint hier eintragen (z. B. Formspree, Make,
+    // Absenden: Endpoint hier eintragen (z. B. Formspree, Make,
     // eigener Server). Leerer String = nur Erfolgsanzeige (Demo).
     // ------------------------------------------------------------
     var FORM_ENDPOINT = "";
@@ -901,12 +975,24 @@
       e.preventDefault();
       var form = e.target;
       if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      var data = new FormData();
+      data.append("vorhaben_typ", answers.vorhaben_typ || "");
+      data.append("zeitrahmen", answers.zeitrahmen || "");
+      data.append("budget", answers.budget || "");
+      data.append("vorhaben", document.getElementById("vorhaben").value);
+      data.append("name", document.getElementById("name").value);
+      data.append("email", document.getElementById("email").value);
+      data.append("phone", document.getElementById("phone").value);
+
       var finish = function () {
-        document.getElementById("formFields").style.display = "none";
+        document.querySelectorAll(".form-step").forEach(function (s) { s.classList.remove("active"); });
         document.getElementById("formSuccess").style.display = "block";
+        progressFill.style.width = "100%";
+        stepLabel.textContent = "Fertig";
       };
       if (FORM_ENDPOINT) {
-        fetch(FORM_ENDPOINT, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } })
+        fetch(FORM_ENDPOINT, { method: "POST", body: data, headers: { Accept: "application/json" } })
           .then(finish).catch(finish);
       } else {
         finish();
