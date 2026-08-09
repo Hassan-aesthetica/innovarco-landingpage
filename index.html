@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8"/>
+  <title>Innovarco - Moin</title>
+  <meta content="Innovarco – Deine erfahrene Agentur für E2E App-Entwicklung. Mit agilen Methoden, modernsten Technologien und echter Hemdsärmlichkeit realisieren wir innovative digitale Lösungen." name="description"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta name="robots" content="noindex, follow"/>
+  <link href="https://cdn.prod.website-files.com" rel="preconnect" crossorigin="anonymous"/>
+  <link href="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67cfeb67c41b576d38867b18_Group%204.svg" rel="shortcut icon" type="image/x-icon"/>
+  <link href="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67cfeb57ea7df7877702420e_Group%203.svg" rel="apple-touch-icon"/>
+  <style>
+    /* ============================================================
+       Original Innovarco Design-Tokens (aus innovarco.de Webflow-CSS)
+       ============================================================ */
+    @font-face {
+      font-family: 'BDO Grotesk';
+      src: url("https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67b88a7ccf01be83ee65e600_BDOGrotesk-VF.ttf") format("truetype");
+      font-weight: 300 900;
+      font-style: normal;
+      font-display: block;
+    }
+    :root {
+      --font-family: "BDO Grotesk", Arial, sans-serif;
+      --dark: #000;
+      --white: white;
+      --button-radius: 4px;
+      --default-radius: 6px;
+      --border-dark: #0000001f;
+      --border-white: #fff3;
+      --neutral-2: #edede8;
+      --body-text-white: #ffffffb3;
+      --body-text: #000000b3;
+      --neutral-1: #f6f6f3;
+      --accent: #ffd84d;
+      --accent-soft: #fff3c2;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    [id] { scroll-margin-top: 90px; }
+    body {
+      font-family: var(--font-family);
+      color: var(--dark);
+      background-color: var(--white);
+      font-size: 16px;
+      line-height: 1.4em;
+      font-weight: 400;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: inline-block; border: 0; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ---------- Typografie (Originalwerte) ---------- */
+    .title-huge   { font-size: 102px; font-weight: 400; line-height: 1em; }
+    .title-large  { letter-spacing: -.01em; font-size: 51px; font-weight: 400; line-height: 1.2em; }
+    .title-medium { font-size: 40px; font-weight: 400; line-height: 1.2em; }
+    .title-small  { font-size: 32px; font-weight: 400; line-height: 1.3em; }
+    .subheading   { font-size: 25px; font-weight: 400; line-height: 1.4em; }
+    .large-text   { font-size: 20px; font-weight: 400; line-height: 1.4em; }
+    .muted-text   { opacity: .5; }
+    .body-text    { color: var(--body-text); }
+    .white-body-text { color: var(--body-text-white); }
+    .small-text   { font-size: 13px; line-height: 1.4em; }
+    .bold-text    { font-weight: 600; }
+
+    /* ---------- Gelbe Akzente ---------- */
+    .highlight {
+      background-image: linear-gradient(transparent 58%, var(--accent) 58%, var(--accent) 94%, transparent 94%);
+    }
+    .tick {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 19px; height: 19px; flex-shrink: 0;
+      border-radius: 50%;
+      background-color: var(--accent);
+      color: #000;
+      font-size: 11px; line-height: 1;
+      margin-right: 10px;
+      transform: translateY(2px);
+    }
+    .section-title .title-large::after {
+      content: "";
+      display: block;
+      width: 54px; height: 4px;
+      border-radius: 2px;
+      background-color: var(--accent);
+      margin-top: 16px;
+    }
+    @media (max-width: 991px) {
+      .title-huge   { font-size: 81px; }
+      .title-large  { font-size: 40px; }
+      .title-medium { font-size: 32px; line-height: 1.3em; }
+      .title-small  { font-size: 25px; }
+      .subheading   { font-size: 20px; }
+    }
+    @media (max-width: 479px) {
+      .title-huge  { font-size: 56px; }
+      .title-large { font-size: 31px; }
+    }
+
+    /* ---------- Layout ---------- */
+    .container---main {
+      width: 100%;
+      max-width: 1500px;
+      margin-left: auto; margin-right: auto;
+      padding-left: 24px; padding-right: 24px;
+    }
+    @media (max-width: 479px) { .container---main { padding-left: 18px; padding-right: 18px; } }
+    .section { display: flex; flex-flow: column; padding-top: 36px; padding-bottom: 96px; overflow: hidden; }
+    @media (max-width: 767px) { .section { padding-top: 24px; padding-bottom: 60px; } }
+    .vertical-section { display: flex; flex-flow: column; grid-row-gap: 72px; }
+    @media (max-width: 767px) { .vertical-section { grid-row-gap: 48px; } }
+    .section-title { display: flex; flex-flow: column; grid-row-gap: 18px; }
+    .content-short  { width: 100%; max-width: 468px; }
+    .content-medium { width: 100%; max-width: 714px; }
+
+    /* ---------- Navbar ---------- */
+    .navbar {
+      background-color: var(--white);
+      justify-content: center; align-items: center;
+      height: 70px; display: flex;
+      position: sticky; top: 0; z-index: 100;
+      border-bottom: 1px solid var(--border-dark);
+    }
+    .navbar-row { display: flex; flex: 1; justify-content: space-between; align-items: center; grid-column-gap: 16px; }
+    .nav-logo { font-size: 20px; letter-spacing: .01em; }
+    .nav-links { display: flex; align-items: center; grid-column-gap: 12px; }
+    .nav-link-2 {
+      display: flex; align-items: center;
+      color: #000; border-radius: 4px;
+      padding: 9px 18px; transition: background-color .2s;
+    }
+    .nav-link-2:hover { background-color: var(--neutral-1); }
+    @media (max-width: 767px) { .nav-link-2 { display: none; } }
+
+    /* ---------- Buttons ---------- */
+    .button {
+      display: inline-block;
+      background-color: var(--dark);
+      color: var(--white);
+      border: 0; cursor: pointer;
+      border-radius: var(--button-radius);
+      font-family: var(--font-family);
+      font-size: 16px; line-height: 1.4em;
+      padding: 18px 36px;
+      transition: opacity .2s;
+      text-align: center;
+    }
+    .button:hover { opacity: 1; transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,.18); }
+    .button { transition: opacity .2s, transform .2s, box-shadow .2s; }
+    .button.small { padding: 12px 24px; }
+    @media (max-width: 479px) { .button.small { padding: 10px 16px; font-size: 14px; } }
+
+    /* ---------- Hero ---------- */
+    .grid-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: 48px; grid-row-gap: 36px;
+      align-items: start;
+    }
+    @media (max-width: 991px) { .grid-hero { grid-template-columns: 1fr; } }
+    .hero-left { display: flex; flex-flow: column; grid-row-gap: 30px; }
+    .zoom-out-image-wrapper {
+      border-radius: var(--default-radius);
+      position: relative; overflow: hidden;
+    }
+    .zoom-out-image-wrapper img { width: 100%; display: block; transform: scale(1.2); }
+    .list { display: flex; flex-flow: column; grid-row-gap: 8px; }
+    .hero-note { color: var(--body-text); font-size: 14px; }
+
+    /* Mobile: Reihenfolge Headline -> Formular -> Bild */
+    @media (max-width: 991px) {
+      .grid-hero { display: flex; flex-flow: column; }
+      .hero-left { order: 1; }
+      .hero-form-col { order: 2; }
+    }
+
+    /* Ladeanimationen wie im Original */
+    .fade-in-first, .fade-in-second, .fade-in-third { opacity: 0; }
+    .loaded .fade-in-first  { animation: fadeInUp .8s ease .1s forwards; }
+    .loaded .fade-in-second { animation: fadeInUp .8s ease .35s forwards; }
+    .loaded .fade-in-third  { animation: fadeInUp .8s ease .6s forwards; }
+    .loaded .zoom-out-image-wrapper img { animation: zoomOut 1.6s cubic-bezier(.25,.46,.45,.94) .1s forwards; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes zoomOut  { from { transform: scale(1.2); } to { transform: scale(1); } }
+    .fade-in-on-scroll { opacity: 0; transform: translateY(36px); transition: opacity 1s cubic-bezier(.22,.61,.36,1), transform 1s cubic-bezier(.22,.61,.36,1); will-change: opacity, transform; }
+    .fade-in-on-scroll.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in-first, .fade-in-second, .fade-in-third, .fade-in-on-scroll { opacity: 1 !important; transform: none !important; animation: none !important; }
+      .zoom-out-image-wrapper img { transform: none !important; animation: none !important; }
+    }
+
+    /* ---------- Multi-Step-Formular ---------- */
+    .form-card {
+      border-radius: var(--default-radius);
+      background-color: var(--neutral-1);
+      border: 1px solid var(--border-dark);
+      box-shadow: 0 16px 44px rgba(0, 0, 0, .07);
+      padding: 28px 24px;
+      width: 100%;
+    }
+    @media (min-width: 992px) { .form-card { position: sticky; top: 94px; } }
+    .progress-row { display: flex; justify-content: space-between; align-items: center; margin: 18px 0 10px; }
+    .progress-label { font-size: 13px; color: var(--body-text); }
+    .progress-track { height: 3px; background-color: var(--border-dark); border-radius: 2px; overflow: hidden; margin-bottom: 24px; }
+    .progress-fill { height: 100%; background-color: var(--accent); width: 20%; transition: width .55s cubic-bezier(.22,.61,.36,1); }
+
+    .form-step { display: none; }
+    .form-step.active { display: flex; flex-flow: column; grid-row-gap: 16px; animation: stepIn .5s cubic-bezier(.22,.61,.36,1); }
+    @keyframes stepIn { from { opacity: 0; transform: translateX(22px); } to { opacity: 1; transform: none; } }
+
+    .step-question { font-size: 20px; line-height: 1.35em; }
+    .option-grid { display: flex; flex-flow: column; grid-row-gap: 10px; }
+    .option-btn {
+      display: flex; align-items: center; grid-column-gap: 14px;
+      font-family: var(--font-family);
+      font-size: 16px; line-height: 1.4em;
+      text-align: left;
+      background-color: var(--white);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--default-radius);
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: border-color .25s cubic-bezier(.22,.61,.36,1), background-color .25s cubic-bezier(.22,.61,.36,1), color .25s cubic-bezier(.22,.61,.36,1), transform .25s cubic-bezier(.22,.61,.36,1);
+    }
+    .option-btn:hover { border-color: #000; transform: translateX(2px); }
+    .option-btn:hover .option-icon { background-color: var(--accent); }
+    .option-btn.selected { background-color: var(--dark); border-color: var(--dark); color: var(--white); }
+    .option-icon {
+      width: 42px; height: 42px; flex-shrink: 0;
+      border-radius: var(--button-radius);
+      background-color: var(--neutral-2);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 600; font-size: 15px;
+      transition: background-color .15s, color .15s;
+    }
+    .option-btn.selected .option-icon { background-color: var(--accent); color: #000; }
+    .option-icon svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+    .field-label { font-size: 14px; margin-bottom: 6px; display: block; color: var(--body-text); }
+    .text-field {
+      width: 100%;
+      font-family: var(--font-family);
+      font-size: 16px; line-height: 1.4em;
+      color: var(--dark);
+      background-color: var(--white);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--button-radius);
+      padding: 14px 16px;
+    }
+    .text-field:focus { outline: none; border-color: #000; }
+    textarea.text-field { min-height: 110px; resize: vertical; }
+    .checkbox-row { display: flex; grid-column-gap: 10px; align-items: flex-start; }
+    .checkbox-row input { margin-top: 3px; accent-color: #000; }
+    .checkbox-label { color: var(--body-text); font-size: 13px; line-height: 1.4em; }
+
+    .step-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
+    .back-link {
+      font-family: var(--font-family); font-size: 14px;
+      color: var(--body-text); background: none; border: 0;
+      cursor: pointer; padding: 8px 0;
+    }
+    .back-link:hover { color: var(--dark); }
+    .form-success { display: none; padding: 12px 0; }
+
+    /* ---------- Boxen / Metriken ---------- */
+    .ethos-boxes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: 24px; grid-row-gap: 24px;
+      align-self: stretch;
+    }
+    @media (max-width: 767px) { .ethos-boxes { grid-template-columns: 1fr; } }
+    .ethos-box {
+      display: flex; flex-flow: column;
+      grid-row-gap: 72px;
+      border-radius: var(--default-radius);
+      background-color: var(--neutral-1);
+      padding: 24px;
+    }
+    .metric-aligned-bottom {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-column-gap: 12px;
+      align-items: end; justify-content: start;
+      margin-top: auto;
+    }
+    .metric-explainer { max-width: 250px; }
+    .inline-cta { display: flex; flex-wrap: wrap; align-items: center; grid-column-gap: 18px; grid-row-gap: 12px; }
+
+    /* ---------- Flutterflow-Slide ---------- */
+    .quote-slide {
+      border-radius: var(--default-radius);
+      color: var(--white);
+      display: flex; flex-flow: column;
+      justify-content: space-between; align-items: flex-start;
+      height: 480px; padding: 24px;
+      background-color: #4b39ef;
+      background-image: linear-gradient(45deg, #4b39ef, #fff);
+    }
+    @media (max-width: 767px) { .quote-slide { height: 400px; } }
+    .quote-author-centered { display: flex; align-items: center; grid-column-gap: 18px; }
+    .customer-small { border-radius: var(--default-radius); max-height: 72px; }
+    .long-text { max-width: 714px; }
+
+    /* ---------- Referenzen / Projekt ---------- */
+    .project-card {
+      border-radius: var(--default-radius);
+      background-color: var(--neutral-1);
+      overflow: hidden;
+    }
+    .project-visual {
+      display: flex; flex-flow: column; align-items: center;
+      padding: 48px 24px 0;
+    }
+    .project-visual .zoom-out-image-wrapper { max-width: 560px; width: 100%; }
+    .project-visual-caption { color: var(--body-text); font-size: 13px; margin-top: 14px; text-align: center; }
+    .project-body {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      grid-column-gap: 48px; grid-row-gap: 36px;
+      padding: 36px 24px;
+    }
+    @media (max-width: 767px) { .project-body { grid-template-columns: 1fr; padding: 24px 18px; } }
+    .project-meta { display: flex; flex-flow: column; grid-row-gap: 24px; }
+    .project-meta-item { display: flex; flex-flow: column; grid-row-gap: 4px; }
+    .meta-label { color: var(--body-text); font-size: 13px; }
+    .tag-row { display: flex; flex-wrap: wrap; grid-column-gap: 8px; grid-row-gap: 8px; }
+    .tag {
+      border: 1px solid var(--border-dark);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 13px;
+      background-color: var(--white);
+    }
+    .project-text { display: flex; flex-flow: column; grid-row-gap: 24px; }
+    .result-list { display: flex; flex-flow: column; grid-row-gap: 10px; }
+    .arrow-link-dark { display: inline-flex; align-items: center; grid-column-gap: 6px; text-decoration: underline; }
+
+    /* ---------- Accordions ---------- */
+    .process-list { display: flex; flex-flow: column; grid-row-gap: 6px; align-self: stretch; }
+    .accordion-panel {
+      border-radius: var(--default-radius);
+      background-color: var(--neutral-1);
+      display: flex; flex-flow: column; align-self: stretch;
+    }
+    .accordion-title {
+      display: flex; justify-content: space-between; align-items: center;
+      grid-column-gap: 24px; cursor: pointer; padding: 18px;
+    }
+    .process-accordion-title { padding: 24px 18px; }
+    .accordion-title-icon { transition: transform .3s ease; }
+    .accordion-title-icon.large { min-height: 24px; }
+    .accordion-panel.open .accordion-title-icon { transform: rotate(45deg); }
+    .accordion-content-wrapper { overflow: hidden; max-height: 0; transition: max-height .55s cubic-bezier(.4,0,.2,1); }
+    .accordion-content { padding: 0 18px 24px; opacity: 0; transform: translateY(8px); transition: opacity .45s ease .12s, transform .45s ease .12s; }
+    .accordion-panel.open .accordion-content { opacity: 1; transform: none; }
+    .process-text { display: flex; flex-flow: column; grid-row-gap: 18px; max-width: 714px; }
+
+    /* ---------- Technologie-Marquee ---------- */
+    .marquee {
+      display: flex; overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+      mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+    }
+    .collection-list {
+      display: flex; grid-column-gap: 16px;
+      padding-right: 16px;
+      flex-shrink: 0;
+      animation: marquee 40s linear infinite;
+    }
+    .marquee:hover .collection-list { animation-play-state: paused; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+    .expertise-card {
+      display: flex; flex-flow: column;
+      justify-content: space-around; align-items: center;
+      grid-row-gap: 16px;
+      border-radius: var(--default-radius);
+      background-color: var(--neutral-1);
+      height: 300px; width: 300px; padding: 18px;
+      flex-shrink: 0;
+    }
+    @media (max-width: 767px) { .expertise-card { height: 220px; width: 220px; } }
+    .expertise-card-image { width: 130px; height: 130px; object-fit: contain; }
+    @media (max-width: 767px) { .expertise-card-image { width: 95px; height: 95px; } }
+
+    /* ---------- Abschluss-CTA ---------- */
+    .cta-card {
+      border-radius: var(--default-radius);
+      background-color: var(--neutral-1);
+      padding: 36px 24px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: 48px; grid-row-gap: 36px;
+    }
+    @media (max-width: 991px) { .cta-card { grid-template-columns: 1fr; } }
+
+    /* ---------- FAQ ---------- */
+    .faq-grid { display: grid; grid-template-columns: .6fr 1.4fr; grid-column-gap: 24px; grid-row-gap: 48px; }
+    @media (max-width: 767px) { .faq-grid { grid-template-columns: 1fr; } }
+    .faq-list { display: flex; flex-flow: column; grid-row-gap: 18px; }
+    .faq-list .accordion-title { padding: 24px 18px; }
+    .faq-list .accordion-content { padding: 0 18px 24px; }
+
+    /* ---------- Footer ---------- */
+    .footer { background-color: var(--dark); color: var(--white); padding-top: 96px; padding-bottom: 96px; }
+    .footer-wrapper { display: flex; flex-flow: column; grid-row-gap: 144px; }
+    @media (max-width: 767px) { .footer-wrapper { grid-row-gap: 72px; } }
+    .footer-menus-grid { display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 24px; grid-row-gap: 24px; }
+    @media (max-width: 479px) { .footer-menus-grid { grid-template-columns: 1fr; } }
+    .footer-contact-group { display: flex; flex-flow: column; grid-row-gap: 24px; }
+    .footer-contact-item { display: flex; flex-flow: column; grid-row-gap: 6px; }
+    .footer-links { display: flex; flex-flow: column; grid-row-gap: 12px; }
+    .white-link { color: var(--body-text-white); transition: color .2s; }
+    .white-link:hover { color: var(--accent); }
+    .arrow-hover-link { display: flex; align-items: center; grid-column-gap: 6px; color: var(--body-text-white); transition: color .2s; }
+    .arrow-hover-link:hover { color: var(--accent); }
+    .arrow-hover-icon { width: 16px; }
+    .footer-bottom { display: flex; flex-flow: column; grid-row-gap: 24px; }
+    .footer-large-logo { width: 100%; display: block; }
+    .horizontal-line.white { background-color: var(--border-white); width: 100%; height: 1px; }
+  </style>
+</head>
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+  <div class="navbar">
+    <div class="container---main navbar-row">
+      <a href="#top" class="nav-logo">INNOVARCO</a>
+      <nav class="nav-links">
+        <a href="#referenzen" class="nav-link-2">Referenzen</a>
+        <a href="#prozess" class="nav-link-2">Prozess</a>
+        <a href="#kontakt" class="button small">Jetzt anfragen</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ================= HERO MIT MULTI-STEP-FORMULAR ================= -->
+  <section class="section" id="top" style="padding-top:60px;">
+    <div class="container---main">
+      <div class="grid-hero">
+
+        <div class="hero-left fade-in-first">
+          <h1 class="title-large">Deine Agentur für Apps, die <span class="highlight">funktionieren</span>. Modern, schnell, stressfrei.</h1>
+          <div class="large-text body-text content-short">Wie viele Stunden verliert Dein Team jede Woche an manuelle Prozesse? Beantworte 5 kurze Fragen und Du bekommst in 24&nbsp;Stunden eine ehrliche Einschätzung – kostenlos.</div>
+          <div class="list">
+            <div class="body-text"><span class="tick">✓</span>Antwort innerhalb von 24 Stunden</div>
+            <div class="body-text"><span class="tick">✓</span>Kostenlos, unverbindlich, kein Verkaufsgespräch</div>
+            <div class="body-text"><span class="tick">✓</span>FlutterFlow Agency Partner aus Hamburg</div>
+          </div>
+        </div>
+
+        <div class="hero-form-col fade-in-second">
+          <div class="form-card" id="kontakt">
+            <div class="title-small">Was ist Dein Vorhaben?</div>
+            <div class="progress-row">
+              <div class="progress-label" id="stepLabel">Schritt 1 von 5</div>
+              <div class="progress-label">≈ 2 Minuten</div>
+            </div>
+            <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+            <form id="leadForm" novalidate>
+
+              <!-- Schritt 1 -->
+              <div class="form-step active" data-step="1">
+                <div class="step-question">Was möchtest Du digitalisieren oder bauen?</div>
+                <div class="option-grid" data-field="vorhaben_typ">
+                  <button type="button" class="option-btn" data-value="Interne Prozesse automatisieren">
+                    <span class="option-icon"><svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="9" cy="6" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="7" cy="18" r="2"/></svg></span>
+                    Interne Prozesse automatisieren
+                  </button>
+                  <button type="button" class="option-btn" data-value="Eine neue App-Idee umsetzen">
+                    <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.3 1 2.5h6c0-1.2.4-1.9 1-2.5A6 6 0 0 0 12 3z"/><line x1="9.5" y1="19" x2="14.5" y2="19"/><line x1="10.5" y1="21.5" x2="13.5" y2="21.5"/></svg></span>
+                    Eine neue App-Idee umsetzen
+                  </button>
+                  <button type="button" class="option-btn" data-value="Bestehende Software verbessern">
+                    <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><polyline points="21 3 21 9 15 9"/></svg></span>
+                    Bestehende Software verbessern
+                  </button>
+                  <button type="button" class="option-btn" data-value="Noch unklar – ich brauche Beratung">
+                    <span class="option-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.8 2.1c-.8.5-1.3 1-1.3 1.9v.5"/><line x1="12" y1="17" x2="12" y2="17.01"/></svg></span>
+                    Noch unklar – ich brauche Beratung
+                  </button>
+                </div>
+              </div>
+
+              <!-- Schritt 2 -->
+              <div class="form-step" data-step="2">
+                <div class="step-question">Wann soll Dein Projekt starten?</div>
+                <div class="option-grid" data-field="zeitrahmen">
+                  <button type="button" class="option-btn" data-value="So schnell wie möglich">
+                    <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span>
+                    So schnell wie möglich
+                  </button>
+                  <button type="button" class="option-btn" data-value="In den nächsten 1–3 Monaten">
+                    <span class="option-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg></span>
+                    In den nächsten 1–3 Monaten
+                  </button>
+                  <button type="button" class="option-btn" data-value="In 3–6 Monaten">
+                    <span class="option-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg></span>
+                    In 3–6 Monaten
+                  </button>
+                  <button type="button" class="option-btn" data-value="Ich informiere mich erst einmal">
+                    <span class="option-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.3" y2="16.3"/></svg></span>
+                    Ich informiere mich erst einmal
+                  </button>
+                </div>
+                <div class="step-nav"><button type="button" class="back-link">← Zurück</button></div>
+              </div>
+
+              <!-- Schritt 3 -->
+              <div class="form-step" data-step="3">
+                <div class="step-question">Welches Budget hast Du ungefähr eingeplant?</div>
+                <div class="option-grid" data-field="budget">
+                  <button type="button" class="option-btn" data-value="Unter 10.000 €">
+                    <span class="option-icon">€</span>
+                    Unter 10.000 €
+                  </button>
+                  <button type="button" class="option-btn" data-value="10.000 – 25.000 €">
+                    <span class="option-icon">€€</span>
+                    10.000 – 25.000 €
+                  </button>
+                  <button type="button" class="option-btn" data-value="Über 25.000 €">
+                    <span class="option-icon">€€€</span>
+                    Über 25.000 €
+                  </button>
+                  <button type="button" class="option-btn" data-value="Noch offen – beratet mich">
+                    <span class="option-icon"><svg viewBox="0 0 24 24"><path d="M8 10a4 4 0 1 1 8 0c0 2.5-2 3-3 4.5"/><line x1="12" y1="18.5" x2="12" y2="18.51"/></svg></span>
+                    Noch offen – beratet mich
+                  </button>
+                </div>
+                <div class="step-nav"><button type="button" class="back-link">← Zurück</button></div>
+              </div>
+
+              <!-- Schritt 4 -->
+              <div class="form-step" data-step="4">
+                <div class="step-question">Beschreib Dein Vorhaben in 1–2 Sätzen.</div>
+                <div>
+                  <textarea class="text-field" id="vorhaben" name="vorhaben" placeholder="Welcher Prozess soll einfacher werden? Was soll die App können?"></textarea>
+                  <div class="hero-note" style="margin-top:6px;">Optional – hilft uns aber, Dir eine konkretere Einschätzung zu geben.</div>
+                </div>
+                <div class="step-nav">
+                  <button type="button" class="back-link">← Zurück</button>
+                  <button type="button" class="button" id="toStep5">Weiter →</button>
+                </div>
+              </div>
+
+              <!-- Schritt 5 -->
+              <div class="form-step" data-step="5">
+                <div class="step-question">Fast geschafft – wohin dürfen wir Deine Einschätzung schicken?</div>
+                <div>
+                  <label class="field-label" for="name">Wie heißt Du?</label>
+                  <input class="text-field" type="text" id="name" name="name" placeholder="Vor- und Nachname" autocomplete="name" required/>
+                </div>
+                <div>
+                  <label class="field-label" for="email">Deine E-Mail-Adresse</label>
+                  <input class="text-field" type="email" id="email" name="email" placeholder="name@firma.de" autocomplete="email" required/>
+                </div>
+                <div>
+                  <label class="field-label" for="phone">Deine Telefonnummer</label>
+                  <input class="text-field" type="tel" id="phone" name="phone" placeholder="+49 40 123456" autocomplete="tel" required/>
+                </div>
+                <label class="checkbox-row">
+                  <input type="checkbox" name="consent" required/>
+                  <span class="checkbox-label">Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert und verwendet werden. Weitere Informationen in der <a href="https://www.innovarco.de/utilities/privacy-policy" style="text-decoration:underline;">Datenschutzerklärung</a>.</span>
+                </label>
+                <button type="submit" class="button">Kostenlose Einschätzung anfragen</button>
+                <div class="hero-note">🔒 Vertraulich · Keine Weitergabe Deiner Daten · Antwort in 24&nbsp;h</div>
+                <div class="step-nav"><button type="button" class="back-link">← Zurück</button></div>
+              </div>
+
+              <!-- Erfolg -->
+              <div class="form-success" id="formSuccess">
+                <div style="width:52px;height:52px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px;">✓</div>
+                <div class="title-small">Moin &amp; danke!</div>
+                <div class="large-text body-text" style="margin-top:12px;">Wir haben Dein Vorhaben erhalten und melden uns innerhalb von 24 Stunden bei Dir – per E-Mail oder Telefon.</div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= METRIKEN ================= -->
+  <section class="section">
+    <div class="container---main">
+      <div class="fade-in-third">
+        <div class="vertical-section">
+          <div class="section-title">
+            <div class="title-large">Mehr Effizienz. Weniger Kosten.</div>
+            <div class="large-text content-short">Wir digitalisieren Prozesse, damit Dein Unternehmen schneller, smarter und kosteneffizienter arbeitet.</div>
+          </div>
+          <div class="ethos-boxes">
+            <div class="ethos-box">
+              <div class="subheading muted-text">Wie oft tippt Dein Team dieselben Daten doppelt ein – in Excel, per E-Mail, ins System? Automatisierte Workflows machen damit Schluss.</div>
+              <div class="metric-aligned-bottom">
+                <div class="title-huge">60%</div>
+                <div class="metric-explainer">Zeiteinsparung bei Prozessen</div>
+              </div>
+            </div>
+            <div class="ethos-box">
+              <div class="subheading muted-text">Wie viel kostet Dich Papierkram wirklich – in Fehlern, Suchzeiten und Nerven? Digitale Prozesse sparen messbar Ressourcen.</div>
+              <div class="metric-aligned-bottom">
+                <div class="title-huge">30%</div>
+                <div class="metric-explainer">geringere Betriebskosten</div>
+              </div>
+            </div>
+            <div class="ethos-box">
+              <div class="subheading muted-text">Wie lange wartest Du auf Zahlen, bevor Du entscheiden kannst? Mit Echtzeit-Daten aus einer zentralen Plattform entscheidest Du sofort.</div>
+              <div class="metric-aligned-bottom">
+                <div class="title-huge">50%</div>
+                <div class="metric-explainer">schnellere interne Entscheidungsprozesse</div>
+              </div>
+            </div>
+            <div class="ethos-box" style="justify-content:space-between;">
+              <div class="subheading">Hast Du Dich in einer dieser Fragen wiedererkannt? Dann lass uns über Deinen konkreten Fall sprechen.</div>
+              <div class="inline-cta">
+                <a href="#kontakt" class="button">Ja – Potenzial-Check starten</a>
+                <div class="hero-note">5 Fragen · 2 Minuten</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= REFERENZEN ================= -->
+  <section class="section" id="referenzen">
+    <div class="container---main">
+      <div class="fade-in-on-scroll">
+        <div class="vertical-section">
+          <div class="section-title">
+            <div class="title-large">Referenzen.</div>
+            <div class="large-text content-short">Erfolgreiche Projekte statt leerer Versprechen – so sieht es aus, wenn eine App einfach funktioniert.</div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-visual">
+              <div class="zoom-out-image-wrapper">
+                <img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1)-p-1080.png"
+                     alt="Die Justmatch-App auf dem Smartphone"
+                     srcset="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1)-p-500.png 500w, https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1)-p-800.png 800w, https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09c2a922f00493d478500_Frame%202309011%20(1)-p-1080.png 1080w"/>
+              </div>
+              <div class="project-visual-caption">Die Justmatch-App – entwickelt von Innovarco</div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <div class="project-meta-item">
+                  <div class="meta-label">Kunde</div>
+                  <div>Justmatch</div>
+                </div>
+                <div class="project-meta-item">
+                  <div class="meta-label">Industrie</div>
+                  <div>Recruiting</div>
+                </div>
+                <div class="project-meta-item">
+                  <div class="meta-label">Homepage</div>
+                  <a href="https://justmatch.wtf/" target="_blank" rel="noopener" class="arrow-link-dark">justmatch.wtf ↗</a>
+                </div>
+                <div class="project-meta-item">
+                  <div class="meta-label">Technologien</div>
+                  <div class="tag-row">
+                    <div class="tag">Flutterflow</div>
+                    <div class="tag">Firebase</div>
+                    <div class="tag">RESTful</div>
+                    <div class="tag">Google Cloud</div>
+                  </div>
+                </div>
+              </div>
+              <div class="project-text">
+                <div class="title-small">Justmatch – Recruiting neu gedacht</div>
+                <div class="subheading muted-text">Für Justmatch, ein visionäres Recruiting-Tool, haben wir eine digitale Lösung entwickelt, die den konservativen Markt revolutioniert. Die Plattform nutzt modernste KI und BigData, um Kandidaten und Unternehmen intelligent zusammenzubringen.</div>
+                <div class="result-list">
+                  <div class="body-text"><span class="tick">✓</span>Komplette Plattform – von der Analyse bis zum Launch aus einer Hand</div>
+                  <div class="body-text"><span class="tick">✓</span>KI-gestütztes Matching statt tagelanger manueller Vorauswahl</div>
+                  <div class="body-text"><span class="tick">✓</span>Live in Wochen dank FlutterFlow – nicht in Monaten</div>
+                  <div class="body-text"><span class="tick">✓</span>Nach dem Launch: proaktive Wartung &amp; laufender Support</div>
+                </div>
+                <div class="inline-cta">
+                  <a href="#kontakt" class="button">Ähnliches Projekt? Lass uns sprechen</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="quote-slide">
+            <div class="quote-author-centered">
+              <img alt="Flutterflow Logo" src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67d09d15de2c58228dd3ea1c_logo_flutterflow.svg" class="customer-small"/>
+              <div>Flutterflow × Innovarco</div>
+            </div>
+            <div class="content-medium">
+              <div class="title-medium long-text">Innovarco – Dein Flutterflow Agency Partner – realisiert effizient mobile und webbasierte Anwendungen.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ENTWICKLUNGSPROZESS ================= -->
+  <section class="section" id="prozess">
+    <div class="container---main">
+      <div class="fade-in-on-scroll">
+        <div class="vertical-section">
+          <div class="section-title">
+            <div class="title-large">Der Entwicklungsprozess</div>
+            <div class="large-text content-short">Direkt und unkompliziert zu Deiner App. Wir decken den ganzen Software-Lifecycle ab.</div>
+          </div>
+          <div class="process-list">
+
+            <div class="accordion-panel">
+              <div class="accordion-title process-accordion-title">
+                <div class="title-small">Umfang</div>
+                <img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67b88a7ccf01be83ee65e620_interface-icon-plus.svg" alt="Plus icon" class="accordion-title-icon large"/>
+              </div>
+              <div class="accordion-content-wrapper">
+                <div class="accordion-content">
+                  <div class="process-text">
+                    <div class="subheading">Wir beginnen damit, tief in Deine Unternehmenswelt einzutauchen, indem wir Ihre Anforderungen, Ziele und Marktpotenziale sorgfältig analysieren, um eine fundierte Basis für ein erfolgreiches Projekt zu schaffen.</div>
+                    <div class="list">
+                      <div>Wichtige Aktivitäten:</div>
+                      <div class="body-text">Anforderungsanalyse</div>
+                      <div class="body-text">Zieldefinition</div>
+                      <div class="body-text">Markt- und Wettbewerbsanalyse</div>
+                      <div class="body-text">Roadmap-Erstellung</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-panel">
+              <div class="accordion-title process-accordion-title">
+                <div class="title-small">Design</div>
+                <img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67b88a7ccf01be83ee65e620_interface-icon-plus.svg" alt="Plus icon" class="accordion-title-icon large"/>
+              </div>
+              <div class="accordion-content-wrapper">
+                <div class="accordion-content">
+                  <div class="process-text">
+                    <div class="subheading">Im Designprozess entwickeln wir innovative und ansprechende visuelle Konzepte, die Deine Marke authentisch repräsentieren und ein intuitives, benutzerfreundliches Erlebnis bieten.</div>
+                    <div class="list">
+                      <div>Wichtige Aktivitäten:</div>
+                      <div class="body-text">UI/UX-Konzeption</div>
+                      <div class="body-text">Wireframe-Erstellung</div>
+                      <div class="body-text">Prototyping</div>
+                      <div class="body-text">Design-Feedback</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-panel">
+              <div class="accordion-title process-accordion-title">
+                <div class="title-small">Entwicklung</div>
+                <img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67b88a7ccf01be83ee65e620_interface-icon-plus.svg" alt="Plus icon" class="accordion-title-icon large"/>
+              </div>
+              <div class="accordion-content-wrapper">
+                <div class="accordion-content">
+                  <div class="process-text">
+                    <div class="subheading">Während der Entwicklungsphase setzen wir modernste Technologien und agile Methoden ein, um robuste, skalierbare und maßgeschneiderte Lösungen zu realisieren, die Deine individuellen Anforderungen optimal erfüllen.</div>
+                    <div class="list">
+                      <div>Wichtige Aktivitäten:</div>
+                      <div class="body-text">Frontend-Entwicklung</div>
+                      <div class="body-text">Backend-Integration</div>
+                      <div class="body-text">Code-Review &amp; Optimierung</div>
+                      <div class="body-text">Feature-Implementierung</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-panel">
+              <div class="accordion-title process-accordion-title">
+                <div class="title-small">Test &amp; Feedback</div>
+                <img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67b88a7ccf01be83ee65e620_interface-icon-plus.svg" alt="Plus icon" class="accordion-title-icon large"/>
+              </div>
+              <div class="accordion-content-wrapper">
+                <div class="accordion-content">
+                  <div class="process-text">
+                    <div class="subheading">In der Test- und Feedbackphase prüfen wir akribisch jede Funktionalität, integrieren wertvolle Nutzererfahrungen und optimieren Ihre Anwendung kontinuierlich, um höchste Qualität und Performance zu gewährleisten.</div>
+                    <div class="list">
+                      <div>Wichtige Aktivitäten:</div>
+                      <div class="body-text">Funktionstests</div>
+                      <div class="body-text">Usability-Tests</div>
+                      <div class="body-text">Fehleranalyse</div>
+                      <div class="body-text">Nutzerfeedback einholen</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-panel">
+              <div class="accordion-title process-accordion-title">
+                <div class="title-small">Support</div>
+                <img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67b88a7ccf01be83ee65e620_interface-icon-plus.svg" alt="Plus icon" class="accordion-title-icon large"/>
+              </div>
+              <div class="accordion-content-wrapper">
+                <div class="accordion-content">
+                  <div class="process-text">
+                    <div class="subheading">Auch nach dem Launch bleiben wir an Deiner Seite – unser engagierter Support bietet proaktive Wartung, kontinuierliche Betreuung und lösungsorientierte Beratung, damit Ihre Anwendung stets auf dem neuesten Stand bleibt.</div>
+                    <div class="list">
+                      <div>Wichtige Aktivitäten:</div>
+                      <div class="body-text">Technischer Support</div>
+                      <div class="body-text">Monitoring &amp; Updates</div>
+                      <div class="body-text">Sicherheitschecks</div>
+                      <div class="body-text">Schulungen &amp; Beratung</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TECHNOLOGIEN ================= -->
+  <section class="section">
+    <div class="container---main">
+      <div class="fade-in-on-scroll">
+        <div class="section-title">
+          <div class="title-large">Modernste Technologien.</div>
+          <div class="large-text content-short">Wir verwenden ausschließlich modernste Technologien in der App-Entwicklung – so profitierst Du als Kunde von zukunftssicheren, leistungsstarken und effizienten Lösungen.</div>
+        </div>
+      </div>
+    </div>
+    <div class="marquee" style="margin-top:60px;">
+      <div class="collection-list">
+        <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2fa388e58eb874cea399a_OpenAI-black-monoblossom.svg" alt="" class="expertise-card-image"/><div class="bold-text">OpenAI API</div></div>
+        <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d4340f3a88d2cd9e861a97_api.svg" alt="" class="expertise-card-image"/><div class="bold-text">RESTful</div></div>
+        <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2f960957430d44a5f0bef_DskI01bWCIKm51UV1HGzW8rHE.avif" alt="" class="expertise-card-image"/><div class="bold-text">Buildship</div></div>
+        <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2f923684bd0659f7edfbd_google-cloud.svg" alt="" class="expertise-card-image"/><div class="bold-text">GCP</div></div>
+        <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2f7deb785009ac5750f02_ts-logo-512.svg" alt="" class="expertise-card-image"/><div class="bold-text">TypeScript</div></div>
+        <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2f7934c37583ed7d66284_Mark_Logo_Blue.svg" alt="" class="expertise-card-image"/><div class="bold-text">Webflow</div></div>
+        <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2f761b785009ac574a914_icon_flutter.svg" alt="" class="expertise-card-image"/><div class="bold-text">Flutter</div></div>
+        <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2f7266b7a6107cf9a4c13_icon_dart.svg" alt="" class="expertise-card-image"/><div class="bold-text">Dart</div></div>
+        <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2f6ecbddb9c6727717dd5_Logomark_Full%20Color.svg" alt="" class="expertise-card-image"/><div class="bold-text">Firebase</div></div>
+        <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2f6b73914bde8790694ac_supabase-logo-icon.svg" alt="" class="expertise-card-image"/><div class="bold-text">Supabase</div></div>
+        <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2f67982d4f0916037bf01_logoMark_outlinePrimary_transparent.svg" alt="" class="expertise-card-image"/><div class="bold-text">Flutterflow</div></div>
+      </div>
+      <div class="collection-list" aria-hidden="true">
+        <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2fa388e58eb874cea399a_OpenAI-black-monoblossom.svg" alt="" class="expertise-card-image"/><div class="bold-text">OpenAI API</div></div>
+        <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d4340f3a88d2cd9e861a97_api.svg" alt="" class="expertise-card-image"/><div class="bold-text">RESTful</div></div>
+        <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2f960957430d44a5f0bef_DskI01bWCIKm51UV1HGzW8rHE.avif" alt="" class="expertise-card-image"/><div class="bold-text">Buildship</div></div>
+        <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2f923684bd0659f7edfbd_google-cloud.svg" alt="" class="expertise-card-image"/><div class="bold-text">GCP</div></div>
+        <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2f7deb785009ac5750f02_ts-logo-512.svg" alt="" class="expertise-card-image"/><div class="bold-text">TypeScript</div></div>
+        <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2f7934c37583ed7d66284_Mark_Logo_Blue.svg" alt="" class="expertise-card-image"/><div class="bold-text">Webflow</div></div>
+        <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2f761b785009ac574a914_icon_flutter.svg" alt="" class="expertise-card-image"/><div class="bold-text">Flutter</div></div>
+        <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2f7266b7a6107cf9a4c13_icon_dart.svg" alt="" class="expertise-card-image"/><div class="bold-text">Dart</div></div>
+        <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2f6ecbddb9c6727717dd5_Logomark_Full%20Color.svg" alt="" class="expertise-card-image"/><div class="bold-text">Firebase</div></div>
+        <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2f6b73914bde8790694ac_supabase-logo-icon.svg" alt="" class="expertise-card-image"/><div class="bold-text">Supabase</div></div>
+        <div class="expertise-card"><img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e5f7/67d2f67982d4f0916037bf01_logoMark_outlinePrimary_transparent.svg" alt="" class="expertise-card-image"/><div class="bold-text">Flutterflow</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABSCHLUSS-CTA ================= -->
+  <section class="section">
+    <div class="container---main">
+      <div class="cta-card fade-in-on-scroll">
+        <div class="section-title">
+          <div class="title-large"><span class="muted-text">Bereit für Deine App?</span><br/>Lass uns sprechen.</div>
+          <div class="large-text content-short body-text">5 kurze Fragen, 2 Minuten – und Du weißt, was Deine App kostet, wie lange sie dauert und ob sie sich lohnt.</div>
+        </div>
+        <div class="project-text" style="justify-content:center;">
+          <div class="result-list">
+            <div class="body-text">→&nbsp;&nbsp;Was kostet es Dich jeden Monat, dass dieser Prozess noch manuell läuft?</div>
+            <div class="body-text">→&nbsp;&nbsp;Wie lange willst Du die Idee noch vor Dir herschieben?</div>
+            <div class="body-text">→&nbsp;&nbsp;Was wäre, wenn Deine App in wenigen Wochen live ist?</div>
+          </div>
+          <div class="inline-cta">
+            <a href="#kontakt" class="button">Zum Formular – 2 Minuten</a>
+            <div class="hero-note">Kostenlos &amp; unverbindlich</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="section">
+    <div class="container---main">
+      <div class="faq-grid fade-in-on-scroll">
+        <div class="title-huge">FAQ</div>
+        <div class="faq-list">
+
+          <div class="accordion-panel">
+            <div class="accordion-title">
+              <div class="subheading">Muss ich Erfahrung in der Softwareentwicklung als Kunde haben?</div>
+              <img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67b88a7ccf01be83ee65e620_interface-icon-plus.svg" alt="Plus icon" class="accordion-title-icon large"/>
+            </div>
+            <div class="accordion-content-wrapper">
+              <div class="accordion-content">
+                <div class="body-text content-medium">Nein. Wir begleiten Dich durch den gesamten Prozess – von der ersten Idee bis zur fertigen App. Du brauchst kein technisches Vorwissen, nur ein Vorhaben.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-panel">
+            <div class="accordion-title">
+              <div class="subheading">Wie schnell kann mein Projekt starten?</div>
+              <img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67b88a7ccf01be83ee65e620_interface-icon-plus.svg" alt="Plus icon" class="accordion-title-icon large"/>
+            </div>
+            <div class="accordion-content-wrapper">
+              <div class="accordion-content">
+                <div class="body-text content-medium">In der Regel sehr schnell: Nach Deiner Anfrage melden wir uns innerhalb von 24 Stunden, klären den Umfang und starten direkt mit der Analyse.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-panel">
+            <div class="accordion-title">
+              <div class="subheading">Sind die Pakete flexibel?</div>
+              <img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67b88a7ccf01be83ee65e620_interface-icon-plus.svg" alt="Plus icon" class="accordion-title-icon large"/>
+            </div>
+            <div class="accordion-content-wrapper">
+              <div class="accordion-content">
+                <div class="body-text content-medium">Ja. Für jeden Bedarf bieten wir die optimale Lösung – auch mit individuell angepassten Tarifen für Deine App.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-panel">
+            <div class="accordion-title">
+              <div class="subheading">Was passiert nach dem Launch?</div>
+              <img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67b88a7ccf01be83ee65e620_interface-icon-plus.svg" alt="Plus icon" class="accordion-title-icon large"/>
+            </div>
+            <div class="accordion-content-wrapper">
+              <div class="accordion-content">
+                <div class="body-text content-medium">Auch nach dem Launch bleiben wir an Deiner Seite – mit proaktiver Wartung, kontinuierlicher Betreuung und lösungsorientierter Beratung.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <section class="footer">
+    <div class="container---main">
+      <div class="footer-wrapper">
+        <div class="footer-menus-grid">
+          <div class="footer-contact-group">
+            <div class="footer-contact-item">
+              <div>Kontakt</div>
+              <a href="mailto:hitmeup@innovarco.de" class="arrow-hover-link">
+                <img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67b88a7ccf01be83ee65e61f_interface-icon-arrow-right-dark.svg" alt="Arrow pointing right icon" class="arrow-hover-icon"/>
+                <div>hitmeup@innovarco.de</div>
+              </a>
+            </div>
+            <div class="footer-contact-item">
+              <div>Adresse</div>
+              <div class="white-body-text">Abelke-Bleken-Ring 18a<br/>21037 Hamburg</div>
+            </div>
+          </div>
+          <div class="footer-links">
+            <div>Direktlinks</div>
+            <a href="https://www.innovarco.de/utilities/imprint" class="white-link">Impressum</a>
+            <a href="https://www.innovarco.de/utilities/privacy-policy" class="white-link">Datenschutz</a>
+            <a href="#kontakt" class="white-link">Kontakt</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <a href="#top">
+            <img src="https://cdn.prod.website-files.com/67b88a7ccf01be83ee65e519/67c9dec70e31993e4c692486_Logo_Dark.svg" alt="INNOVARCO" class="footer-large-logo"/>
+          </a>
+          <div class="small-text muted-text">Apps, die funktionieren. Modern, schnell, stressfrei.</div>
+          <div class="horizontal-line white"></div>
+          <div class="small-text muted-text">Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt, dennoch übernehmen wir keine Gewähr für deren Richtigkeit, Vollständigkeit und Aktualität. Für externe Links gilt, dass wir deren Inhalte nicht kontrollieren und daher keine Haftung übernehmen. Änderungen und Irrtümer bleiben vorbehalten.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Ladeanimationen
+    window.addEventListener("load", function () { document.body.classList.add("loaded"); });
+
+    // Scroll-Einblendungen
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add("visible"); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".fade-in-on-scroll").forEach(function (el) { observer.observe(el); });
+
+    // Accordions
+    document.querySelectorAll(".accordion-panel").forEach(function (panel) {
+      var title = panel.querySelector(".accordion-title");
+      var wrapper = panel.querySelector(".accordion-content-wrapper");
+      title.addEventListener("click", function () {
+        if (panel.classList.contains("open")) {
+          wrapper.style.maxHeight = "0px";
+          panel.classList.remove("open");
+        } else {
+          wrapper.style.maxHeight = wrapper.scrollHeight + "px";
+          panel.classList.add("open");
+        }
+      });
+    });
+
+    // ============================================================
+    // Multi-Step-Formular
+    // ============================================================
+    var TOTAL_STEPS = 5;
+    var currentStep = 1;
+    var answers = {};
+
+    var stepLabel = document.getElementById("stepLabel");
+    var progressFill = document.getElementById("progressFill");
+
+    function showStep(n) {
+      currentStep = n;
+      document.querySelectorAll(".form-step").forEach(function (s) {
+        s.classList.toggle("active", parseInt(s.dataset.step, 10) === n);
+      });
+      stepLabel.textContent = "Schritt " + n + " von " + TOTAL_STEPS;
+      progressFill.style.width = (n / TOTAL_STEPS * 100) + "%";
+    }
+
+    // Options-Buttons: Auswahl speichern und automatisch weiter
+    document.querySelectorAll(".option-grid").forEach(function (grid) {
+      grid.querySelectorAll(".option-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          grid.querySelectorAll(".option-btn").forEach(function (b) { b.classList.remove("selected"); });
+          btn.classList.add("selected");
+          answers[grid.dataset.field] = btn.dataset.value || btn.textContent.trim();
+          setTimeout(function () { if (currentStep < TOTAL_STEPS) showStep(currentStep + 1); }, 250);
+        });
+      });
+    });
+
+    // Zurück-Links
+    document.querySelectorAll(".back-link").forEach(function (btn) {
+      btn.addEventListener("click", function () { if (currentStep > 1) showStep(currentStep - 1); });
+    });
+
+    // Schritt 4 -> 5
+    document.getElementById("toStep5").addEventListener("click", function () { showStep(5); });
+
+    // ------------------------------------------------------------
+    // Absenden: Endpoint hier eintragen (z. B. Formspree, Make,
+    // eigener Server). Leerer String = nur Erfolgsanzeige (Demo).
+    // ------------------------------------------------------------
+    var FORM_ENDPOINT = "";
+
+    document.getElementById("leadForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var form = e.target;
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+
+      var data = new FormData();
+      data.append("vorhaben_typ", answers.vorhaben_typ || "");
+      data.append("zeitrahmen", answers.zeitrahmen || "");
+      data.append("budget", answers.budget || "");
+      data.append("vorhaben", document.getElementById("vorhaben").value);
+      data.append("name", document.getElementById("name").value);
+      data.append("email", document.getElementById("email").value);
+      data.append("phone", document.getElementById("phone").value);
+
+      var finish = function () {
+        document.querySelectorAll(".form-step").forEach(function (s) { s.classList.remove("active"); });
+        document.getElementById("formSuccess").style.display = "block";
+        progressFill.style.width = "100%";
+        stepLabel.textContent = "Fertig";
+      };
+      if (FORM_ENDPOINT) {
+        fetch(FORM_ENDPOINT, { method: "POST", body: data, headers: { Accept: "application/json" } })
+          .then(finish).catch(finish);
+      } else {
+        finish();
+      }
+    });
+  </script>
+</body>
+</html>
