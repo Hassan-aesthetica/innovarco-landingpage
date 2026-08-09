@@ -566,6 +566,7 @@
                   <span class="checkbox-label">Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert und verwendet werden. Weitere Informationen in der <a href="https://www.innovarco.de/utilities/privacy-policy" style="text-decoration:underline;">Datenschutzerklärung</a>.</span>
                 </label>
                 <button type="submit" class="button">Kostenlose Einschätzung anfragen</button>
+                <div class="hero-note" id="formError" style="display:none;color:#c0392b;">Das hat leider nicht geklappt. Bitte versuch es noch einmal oder schreib uns direkt an <a href="mailto:hitmeup@innovarco.de" style="text-decoration:underline;">hitmeup@innovarco.de</a>.</div>
                 <div class="hero-note">🔒 Vertraulich · Keine Weitergabe Deiner Daten · Antwort in 24&nbsp;h</div>
                 <div class="step-nav"><button type="button" class="back-link">← Zurück</button></div>
               </div>
@@ -1052,10 +1053,12 @@
     document.getElementById("toStep5").addEventListener("click", function () { showStep(5); });
 
     // ------------------------------------------------------------
-    // Absenden: Endpoint hier eintragen (z. B. Formspree, Make,
-    // eigener Server). Leerer String = nur Erfolgsanzeige (Demo).
+    // Absenden via FormSubmit (kostenlos, ohne Account).
+    // Empfänger-Adresse hier ändern, falls Leads woanders hin sollen.
+    // Wichtig: Beim ersten Absenden schickt FormSubmit eine
+    // Aktivierungs-Mail an diese Adresse – einmal bestätigen.
     // ------------------------------------------------------------
-    var FORM_ENDPOINT = "";
+    var FORM_ENDPOINT = "https://formsubmit.co/ajax/info@aesthetica.gmbh";
 
     document.getElementById("leadForm").addEventListener("submit", function (e) {
       e.preventDefault();
@@ -1063,26 +1066,40 @@
       if (!form.checkValidity()) { form.reportValidity(); return; }
 
       var data = new FormData();
-      data.append("vorhaben_typ", answers.vorhaben_typ || "");
-      data.append("zeitrahmen", answers.zeitrahmen || "");
-      data.append("budget", answers.budget || "");
-      data.append("vorhaben", document.getElementById("vorhaben").value);
-      data.append("name", document.getElementById("name").value);
-      data.append("email", document.getElementById("email").value);
-      data.append("phone", document.getElementById("phone").value);
+      data.append("_subject", "Neue Projekt-Anfrage über die Innovarco-Landingpage");
+      data.append("_template", "table");
+      data.append("_captcha", "false");
+      data.append("Vorhaben-Typ", answers.vorhaben_typ || "–");
+      data.append("Zeitrahmen", answers.zeitrahmen || "–");
+      data.append("Budget", answers.budget || "–");
+      data.append("Projektbeschreibung", document.getElementById("vorhaben").value || "–");
+      data.append("Name", document.getElementById("name").value);
+      data.append("E-Mail", document.getElementById("email").value);
+      data.append("Telefon", document.getElementById("phone").value);
 
-      var finish = function () {
+      var submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Wird gesendet …";
+
+      var showSuccess = function () {
         document.querySelectorAll(".form-step").forEach(function (s) { s.classList.remove("active"); });
         document.getElementById("formSuccess").style.display = "block";
         progressFill.style.width = "100%";
         stepLabel.textContent = "Fertig";
       };
-      if (FORM_ENDPOINT) {
-        fetch(FORM_ENDPOINT, { method: "POST", body: data, headers: { Accept: "application/json" } })
-          .then(finish).catch(finish);
-      } else {
-        finish();
-      }
+      var showError = function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Kostenlose Einschätzung anfragen";
+        var err = document.getElementById("formError");
+        if (err) { err.style.display = "block"; }
+      };
+
+      fetch(FORM_ENDPOINT, { method: "POST", body: data, headers: { Accept: "application/json" } })
+        .then(function (res) {
+          if (!res.ok) { throw new Error("send failed"); }
+          showSuccess();
+        })
+        .catch(showError);
     });
   </script>
 </body>
