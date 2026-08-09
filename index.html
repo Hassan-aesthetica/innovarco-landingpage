@@ -38,6 +38,7 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+    [id] { scroll-margin-top: 90px; }
     body {
       font-family: var(--font-family);
       color: var(--dark);
@@ -183,7 +184,7 @@
     .loaded .zoom-out-image-wrapper img { animation: zoomOut 1.6s cubic-bezier(.25,.46,.45,.94) .1s forwards; }
     @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes zoomOut  { from { transform: scale(1.2); } to { transform: scale(1); } }
-    .fade-in-on-scroll { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s ease; }
+    .fade-in-on-scroll { opacity: 0; transform: translateY(36px); transition: opacity 1s cubic-bezier(.22,.61,.36,1), transform 1s cubic-bezier(.22,.61,.36,1); will-change: opacity, transform; }
     .fade-in-on-scroll.visible { opacity: 1; transform: none; }
     @media (prefers-reduced-motion: reduce) {
       .fade-in-first, .fade-in-second, .fade-in-third, .fade-in-on-scroll { opacity: 1 !important; transform: none !important; animation: none !important; }
@@ -203,11 +204,11 @@
     .progress-row { display: flex; justify-content: space-between; align-items: center; margin: 18px 0 10px; }
     .progress-label { font-size: 13px; color: var(--body-text); }
     .progress-track { height: 3px; background-color: var(--border-dark); border-radius: 2px; overflow: hidden; margin-bottom: 24px; }
-    .progress-fill { height: 100%; background-color: var(--accent); width: 20%; transition: width .35s ease; }
+    .progress-fill { height: 100%; background-color: var(--accent); width: 20%; transition: width .55s cubic-bezier(.22,.61,.36,1); }
 
     .form-step { display: none; }
-    .form-step.active { display: flex; flex-flow: column; grid-row-gap: 16px; animation: stepIn .35s ease; }
-    @keyframes stepIn { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: none; } }
+    .form-step.active { display: flex; flex-flow: column; grid-row-gap: 16px; animation: stepIn .5s cubic-bezier(.22,.61,.36,1); }
+    @keyframes stepIn { from { opacity: 0; transform: translateX(22px); } to { opacity: 1; transform: none; } }
 
     .step-question { font-size: 20px; line-height: 1.35em; }
     .option-grid { display: flex; flex-flow: column; grid-row-gap: 10px; }
@@ -221,7 +222,7 @@
       border-radius: var(--default-radius);
       padding: 12px 14px;
       cursor: pointer;
-      transition: border-color .15s, background-color .15s, color .15s, transform .15s;
+      transition: border-color .25s cubic-bezier(.22,.61,.36,1), background-color .25s cubic-bezier(.22,.61,.36,1), color .25s cubic-bezier(.22,.61,.36,1), transform .25s cubic-bezier(.22,.61,.36,1);
     }
     .option-btn:hover { border-color: #000; transform: translateX(2px); }
     .option-btn:hover .option-icon { background-color: var(--accent); }
@@ -352,12 +353,17 @@
     .accordion-title-icon { transition: transform .3s ease; }
     .accordion-title-icon.large { min-height: 24px; }
     .accordion-panel.open .accordion-title-icon { transform: rotate(45deg); }
-    .accordion-content-wrapper { overflow: hidden; max-height: 0; transition: max-height .45s ease; }
-    .accordion-content { padding: 0 18px 24px; }
+    .accordion-content-wrapper { overflow: hidden; max-height: 0; transition: max-height .55s cubic-bezier(.4,0,.2,1); }
+    .accordion-content { padding: 0 18px 24px; opacity: 0; transform: translateY(8px); transition: opacity .45s ease .12s, transform .45s ease .12s; }
+    .accordion-panel.open .accordion-content { opacity: 1; transform: none; }
     .process-text { display: flex; flex-flow: column; grid-row-gap: 18px; max-width: 714px; }
 
     /* ---------- Technologie-Marquee ---------- */
-    .marquee { display: flex; overflow: hidden; }
+    .marquee {
+      display: flex; overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+      mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+    }
     .collection-list {
       display: flex; grid-column-gap: 16px;
       padding-right: 16px;
